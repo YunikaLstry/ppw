@@ -176,6 +176,18 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Crawling data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catatan.html">Catatan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prosesTF-IDF.html">Load Data Hasil Preprocessing</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="PCA.html">Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)</a></li>
+
+
+
+
 </ul>
 
     </div>
@@ -351,7 +363,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas in .\nwebmining\lib\site-packages (2.3.3)
+Requirement already satisfied: numpy&gt;=1.22.4 in .\nwebmining\lib\site-packages (from pandas) (2.2.6)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in .\nwebmining\lib\site-packages (from pandas) (2.9.0.post0)
+Requirement already satisfied: pytz&gt;=2020.1 in .\nwebmining\lib\site-packages (from pandas) (2026.3.post1)
+Requirement already satisfied: tzdata&gt;=2022.7 in .\nwebmining\lib\site-packages (from pandas) (2026.4)
+Requirement already satisfied: six&gt;=1.5 in .\nwebmining\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
 Note: you may need to restart the kernel to use updated packages.
 </pre></div>
 </div>
@@ -365,417 +382,6 @@ Note: you may need to restart the kernel to use updated packages.
 <span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pandas
-  Using cached pandas-2.3.3-cp310-cp310-win_amd64.whl.metadata (19 kB)
-Collecting numpy&gt;=1.22.4 (from pandas)
-  Using cached numpy-2.2.6-cp310-cp310-win_amd64.whl.metadata (60 kB)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in .\nwebmining\lib\site-packages (from pandas) (2.9.0.post0)
-Requirement already satisfied: pytz&gt;=2020.1 in .\nwebmining\lib\site-packages (from pandas) (2026.3.post1)
-Requirement already satisfied: tzdata&gt;=2022.7 in .\nwebmining\lib\site-packages (from pandas) (2026.4)
-Requirement already satisfied: six&gt;=1.5 in .\nwebmining\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
-Using cached pandas-2.3.3-cp310-cp310-win_amd64.whl (11.3 MB)
-Using cached numpy-2.2.6-cp310-cp310-win_amd64.whl (12.9 MB)
-Installing collected packages: numpy, pandas
-
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   ---------------------------------------- 0/2 [numpy]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   -------------------- ------------------- 1/2 [pandas]
-   ---------------------------------------- 2/2 [pandas]
-
-Successfully installed numpy-2.2.6 pandas-2.3.3
 </pre></div>
 </div>
 </div>
@@ -892,11 +498,11 @@ Successfully installed numpy-2.2.6 pandas-2.3.3
 -&gt; Total URL Sport yang didapatkan: 100
 
 --- Sampel URL Sport (5 Pertama) ---
-1. https://sport.detik.com/sport-lain/d-8662678/tak-takut-tekanan-jepang-forki-targetkan-1-emas-di-asian-games-2026
-2. https://sport.detik.com/moto-gp/d-8662441/crash-di-san-marino-bezzecchi-balapan-masih-banyak
-3. https://sport.detik.com/moto-gp/d-8662260/karena-jorge-martin-kehilangan-kendali
-4. https://sport.detik.com/moto-gp/d-8661830/bos-ducati-marc-marquez-bukan-favorit-juara
-5. https://sport.detik.com/moto-gp/d-8661491/pimpin-klasemen-marc-marquez-kejuaraan-belum-berakhir
+1. https://sport.detik.com/g-sport/d-8666151/ketum-koni-tutup-program-sport-diplomacy-indonesia-timor-leste
+2. https://sport.detik.com/sport-lain/d-8666068/usai-dilantik-koni-ini-rencana-pengurus-pusat-kickboxing-indonesia
+3. https://sport.detik.com/sport-lain/d-8666076/lina-hisage-atlet-muda-potensial-cabor-tolak-peluru-dari-papua
+4. https://sport.detik.com/sport-lain/d-8665977/tim-equestrian-indonesia-turunkan-12-atlet-di-asian-games-2026
+5. https://sport.detik.com/moto-gp/d-8665638/marc-marquez-adalah-makhluk-mars
 
 ==================================================
 
@@ -904,11 +510,11 @@ Mengumpulkan URL dari https://finance.detik.com/indeks...
 -&gt; Total URL Finance yang didapatkan: 100
 
 --- Sampel URL Finance (5 Pertama) ---
-1. https://finance.detik.com/berita-ekonomi-bisnis/d-8662707/menkeu-suahasil-defisit-apbn-akan-tetap-di-bawah-3
-2. https://finance.detik.com/moneter/d-8662772/penyaluran-kur-tembus-rp-219-62-triliun-diterima-3-41-juta-debitur
-3. https://finance.detik.com/berita-ekonomi-bisnis/d-8662837/gibran-ucapkan-selamat-suahasil-jadi-menkeu-figur-tepat-kelola-apbn
-4. https://finance.detik.com/energi/d-8662784/bahlil-pastikan-cadangan-bbm-di-atas-20-hari
-5. https://finance.detik.com/berita-ekonomi-bisnis/d-8662711/suahasil-ungkap-nasib-perombakan-pejabat-era-purbaya
+1. https://finance.detik.com/infrastruktur/d-8665852/pramono-blak-blakan-ke-prabowo-minta-bantuan-rute-lrt-diperpanjang
+2. https://finance.detik.com/berita-ekonomi-bisnis/d-8665893/dua-dirjen-minta-perombakan-pejabat-era-purbaya-dibatalkan
+3. https://finance.detik.com/infrastruktur/d-8666137/blok-m-kota-tua-dan-misi-mrt-hidupkan-sudut-sudut-jakarta
+4. https://finance.detik.com/berita-ekonomi-bisnis/d-8666109/punya-usaha-baru-merintis-nggak-perlu-jasa-editor-modal-hp-dan-pelajari-di-sini
+5. https://finance.detik.com/energi/d-8666091/bbm-e20-mau-diproduksi-lahan-tebu-2-juta-ha-di-jawa-papua-disiapkan
 </pre></div>
 </div>
 </div>
@@ -918,7 +524,7 @@ Mengumpulkan URL dari https://finance.detik.com/indeks...
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="c1"># 1. Ekstrak Konten Berita</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"🚀 Memulai ekstraksi konten..."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Memulai ekstraksi konten..."</span><span class="p">)</span>
 <span class="n">data_sport</span> <span class="o">=</span> <span class="n">scrape_articles_content</span><span class="p">(</span><span class="n">url_sport</span><span class="p">,</span> <span class="s1">'sport'</span><span class="p">)</span>
 <span class="n">data_finance</span> <span class="o">=</span> <span class="n">scrape_articles_content</span><span class="p">(</span><span class="n">url_finance</span><span class="p">,</span> <span class="s1">'finance'</span><span class="p">)</span>
 
@@ -942,14 +548,14 @@ Mengumpulkan URL dari https://finance.detik.com/indeks...
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🚀 Memulai ekstraksi konten...
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Memulai ekstraksi konten...
 
 🚀 Memulai ekstraksi 100 artikel [SPORT]...
-   └─ [100/100] Processing: https://sport.detik.com/f1/d-8651642/mamma-mia-ant...
+   └─ [100/100] Processing: https://sport.detik.com/sport-lain/d-8656039/ketum...
 ✅ Selesai! Berhasil mengekstrak 100 konten [SPORT].
 
 🚀 Memulai ekstraksi 100 artikel [FINANCE]...
-   └─ [100/100] Processing: https://finance.detik.com/berita-ekonomi-bisnis/d-...
+   └─ [100/100] Processing: https://finance.detik.com/energi/d-8663649/pertami...
 ✅ Selesai! Berhasil mengekstrak 100 konten [FINANCE].
 
 --- LAPORAN EKSTRAKSI &amp; PENGECEKAN DUPLIKAT ---
@@ -963,12 +569,43 @@ Mengumpulkan URL dari https://finance.detik.com/indeks...
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. Gabungkan Data, Buat Kolom ID, &amp; Simpan ke CSV</span>
+
+<span class="c1"># Menggunakan df_clean hasil pembersihan duplikat sebelumnya</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Buat kolom ID berurutan dari 1 sampai total data</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Pastikan urutan 4 fitur: id, isi_berita, label, url</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'isi_berita'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">,</span> <span class="s1">'url'</span><span class="p">]]</span>
+
+<span class="c1"># Simpan ke CSV</span>
+<span class="n">file_output</span> <span class="o">=</span> <span class="s1">'dataset_detik.csv'</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">file_output</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8-sig'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Proses Selesai!"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total baris data tersimpan : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Daftar fitur tersimpan (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">) : </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Proses Selesai!
+Total baris data tersimpan : 200
+Daftar fitur tersimpan (4) : ['id', 'isi_berita', 'label', 'url']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. Gabungkan Data &amp; Simpan ke CSV dengan Pandas</span>
 <span class="n">all_data</span> <span class="o">=</span> <span class="n">data_sport</span> <span class="o">+</span> <span class="n">data_finance</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">all_data</span><span class="p">)</span>
 
 <span class="c1"># Simpan CSV dengan encoding utf-8-sig</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'detik_sport_finance_200.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8-sig'</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'dataset_detik.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8-sig'</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Proses Selesai!"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total baris data tersimpan: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -981,6 +618,82 @@ Total baris data tersimpan: 200
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tampilkan 5 baris pertama data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Scraping Selesai! Data disimpan ke 'dataset_detik.csv'"</span><span class="p">)</span>
+<span class="n">df_preview</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scraping Selesai! Data disimpan ke 'dataset_detik.csv'
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>isi_berita</th>
+      <th>label</th>
+      <th>url</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Ketua Umum Komite Olahraga Nasional Indonesia ...</td>
+      <td>sport</td>
+      <td>https://sport.detik.com/g-sport/d-8666151/ketu...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Pengurus Pusat Kickboxing Indonesia (PP KBI) p...</td>
+      <td>sport</td>
+      <td>https://sport.detik.com/sport-lain/d-8666068/u...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Lina Hisage, atlet tolak peluru asal Wamena, P...</td>
+      <td>sport</td>
+      <td>https://sport.detik.com/sport-lain/d-8666076/l...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Timnas Equestrian Indonesia sudah bertolak ke ...</td>
+      <td>sport</td>
+      <td>https://sport.detik.com/sport-lain/d-8665977/t...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Dalam dua seri terakhir MotoGP 2027, Marc Marq...</td>
+      <td>sport</td>
+      <td>https://sport.detik.com/moto-gp/d-8665638/marc...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 
