@@ -4,3 +4,5 @@ chapters:
   - file: crawling
   - file: preprocessing
   - file: catatan
+  - file: prosesTF-IDF
+  - file: PCA
