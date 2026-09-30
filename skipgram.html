@@ -1,0 +1,798 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Contoh Skipgram &#8212; Web Mining</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'skipgram';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Skip-gram (Word Embedding)" href="clasifikasi_skipgram.html" />
+    <link rel="prev" title="Modelling" href="modelling.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="profil.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/foto.JPG" class="logo__image only-light" alt="Web Mining - Home"/>
+    <script>document.write(`<img src="_static/foto.JPG" class="logo__image only-dark" alt="Web Mining - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="profil.html">
+                    Profile
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="crawling.html">Crawling data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catatan.html">Catatan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prosesTF-IDF.html">Load Data Hasil Preprocessing</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="PCA.html">Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="modelling.html">Modelling</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Contoh Skipgram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clasifikasi_skipgram.html">Skip-gram (Word Embedding)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/YunikaLstry/ppw" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/skipgram.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Contoh Skipgram</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="contoh-skipgram">
+<h1>Contoh Skipgram<a class="headerlink" href="#contoh-skipgram" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Word2Vec</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Membuat 3 kalimat</span>
+<span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"Kucing tidur di atas sofa"</span><span class="p">,</span>
+    <span class="s2">"Anak membaca buku di perpustakaan"</span><span class="p">,</span>
+    <span class="s2">"Mobil merah melaju dengan cepat"</span>
+<span class="p">]</span>
+
+<span class="c1"># 2. Tokenisasi dan lowercase</span>
+<span class="n">tokenized_sentences</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">sentence</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Hasil tokenisasi:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">tokenized_sentences</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+
+<span class="c1"># 3. Membuat model Word2Vec</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="p">(</span>
+    <span class="n">sentences</span><span class="o">=</span><span class="n">tokenized_sentences</span><span class="p">,</span>
+    <span class="n">vector_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>       <span class="c1"># konteks 2 kata</span>
+    <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil tokenisasi:
+----------------------------------------
+['kucing', 'tidur', 'di', 'atas', 'sofa']
+['anak', 'membaca', 'buku', 'di', 'perpustakaan']
+['mobil', 'merah', 'melaju', 'dengan', 'cepat']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4. Menampilkan seluruh vocabulary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">----------------------------------------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Vocabulary"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">kata</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">kata</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan Semua Pasangan Target-Konteks</span>
+<span class="n">window</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">pairs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">tokenized_sentences</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+        <span class="c1"># Menentukan batas konteks</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">window</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">),</span> <span class="n">i</span> <span class="o">+</span> <span class="n">window</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Mengambil pasangan target-konteks</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+            <span class="c1"># Jangan memasangkan kata dengan dirinya sendiri</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">context</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">pairs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">target</span><span class="p">,</span> <span class="n">context</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Vocabulary
+----------------------------------------
+1. di
+2. cepat
+3. dengan
+4. melaju
+5. merah
+6. mobil
+7. perpustakaan
+8. buku
+9. membaca
+10. anak
+11. sofa
+12. atas
+13. tidur
+14. kucing
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menampilkan Hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">----------------------------------------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pasangan (Target, Konteks):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">target</span><span class="p">,</span> <span class="n">context</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Jumlah pasangan:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pairs</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Pasangan (Target, Konteks):
+----------------------------------------
+(kucing, tidur)
+(kucing, di)
+(tidur, kucing)
+(tidur, di)
+(tidur, atas)
+(di, kucing)
+(di, tidur)
+(di, atas)
+(di, sofa)
+(atas, tidur)
+(atas, di)
+(atas, sofa)
+(sofa, di)
+(sofa, atas)
+(anak, membaca)
+(anak, buku)
+(membaca, anak)
+(membaca, buku)
+(membaca, di)
+(buku, anak)
+(buku, membaca)
+(buku, di)
+(buku, perpustakaan)
+(di, membaca)
+(di, buku)
+(di, perpustakaan)
+(perpustakaan, buku)
+(perpustakaan, di)
+(mobil, merah)
+(mobil, melaju)
+(merah, mobil)
+(merah, melaju)
+(merah, dengan)
+(melaju, mobil)
+(melaju, merah)
+(melaju, dengan)
+(melaju, cepat)
+(dengan, merah)
+(dengan, melaju)
+(dengan, cepat)
+(cepat, melaju)
+(cepat, dengan)
+
+Jumlah pasangan: 42
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 5. Mengambil semua kata dan vektornya</span>
+<span class="n">kata</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span>
+<span class="n">vektor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">----------------------------------------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Semua Vektor"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kata</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Kata: </span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Vektor: </span><span class="si">{</span><span class="n">vektor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Semua Vektor
+----------------------------------------
+
+Kata: di
+Vektor: [-0.08214982  0.0547912   0.0309143  -0.01222432 -0.01339695  0.07171957
+ -0.08281088  0.0394736  -0.0597061  -0.08116454]
+
+Kata: cepat
+Vektor: [ 0.00529579  0.09512446  0.04715047  0.05222794  0.04349545  0.05721285
+  0.00264531 -0.07437728  0.06794964 -0.00992281]
+
+Kata: dengan
+Vektor: [ 6.1714578e-05 -2.5829880e-02 -6.3481063e-02  8.5349843e-02
+  5.6319486e-02  2.8775724e-02 -1.9529410e-02  6.4559229e-02
+  9.0828557e-03 -1.1331103e-02]
+
+Kata: melaju
+Vektor: [-0.00990809 -0.05455226 -0.08157282  0.01091695  0.07757796 -0.08723656
+  0.07165825  0.06552622 -0.04464806  0.02633288]
+
+Kata: merah
+Vektor: [-0.06698266  0.05164215  0.0401172  -0.0290898  -0.0864007   0.09416141
+ -0.0108984   0.07865652  0.03557585  0.05564261]
+
+Kata: mobil
+Vektor: [ 0.05197989 -0.06107227 -0.02721879 -0.0066558  -0.00044169 -0.09123925
+  0.00931389 -0.0691421   0.04867518  0.03660978]
+
+Kata: perpustakaan
+Vektor: [ 0.08450556  0.04895242 -0.02667147  0.09350194 -0.01782993 -0.03483493
+  0.08110715 -0.02590806 -0.08473136 -0.00608884]
+
+Kata: buku
+Vektor: [ 0.05913598 -0.06210574 -0.0074119  -0.0740157   0.03729564 -0.00485902
+ -0.03396074 -0.05461813  0.01289997  0.0339628 ]
+
+Kata: membaca
+Vektor: [ 0.08806121 -0.01256962 -0.06786237  0.06653563  0.02595285  0.04005301
+ -0.08055468 -0.03752668  0.05356878  0.06645195]
+
+Kata: anak
+Vektor: [-0.01298307  0.06097836  0.06835787 -0.02251136  0.07962553 -0.04231942
+ -0.05212095  0.03651634  0.02733871 -0.07208452]
+
+Kata: sofa
+Vektor: [ 0.06654735 -0.06001836  0.06097982 -0.09852755  0.05936851  0.05738487
+  0.05607285  0.03297017 -0.00568658  0.04103307]
+
+Kata: atas
+Vektor: [-0.04457568  0.0561458   0.01112939 -0.00821685  0.00112125  0.01374823
+ -0.09254755 -0.0720406  -0.05090377 -0.077094  ]
+
+Kata: tidur
+Vektor: [-0.0120773   0.03368058  0.03088577 -0.00578077  0.07101599  0.01304722
+ -0.08416053  0.05299977  0.01492012  0.02694366]
+
+Kata: kucing
+Vektor: [ 0.01307466  0.01071588 -0.08188672  0.01184143  0.05898251 -0.03920998
+  0.02056764 -0.09383644 -0.03050016 -0.01265653]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 6. Membuat DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">vektor</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="n">kata</span>
+<span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sa">f</span><span class="s2">"dimensi_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">vector_size</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">----------------------------------------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tabel Representasi Vektor"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Tabel Representasi Vektor
+----------------------------------------
+              dimensi_1  dimensi_2  dimensi_3  dimensi_4  dimensi_5  \
+di            -0.082150   0.054791   0.030914  -0.012224  -0.013397   
+cepat          0.005296   0.095124   0.047150   0.052228   0.043495   
+dengan         0.000062  -0.025830  -0.063481   0.085350   0.056319   
+melaju        -0.009908  -0.054552  -0.081573   0.010917   0.077578   
+merah         -0.066983   0.051642   0.040117  -0.029090  -0.086401   
+mobil          0.051980  -0.061072  -0.027219  -0.006656  -0.000442   
+perpustakaan   0.084506   0.048952  -0.026671   0.093502  -0.017830   
+buku           0.059136  -0.062106  -0.007412  -0.074016   0.037296   
+membaca        0.088061  -0.012570  -0.067862   0.066536   0.025953   
+anak          -0.012983   0.060978   0.068358  -0.022511   0.079626   
+sofa           0.066547  -0.060018   0.060980  -0.098528   0.059369   
+atas          -0.044576   0.056146   0.011129  -0.008217   0.001121   
+tidur         -0.012077   0.033681   0.030886  -0.005781   0.071016   
+kucing         0.013075   0.010716  -0.081887   0.011841   0.058983   
+
+              dimensi_6  dimensi_7  dimensi_8  dimensi_9  dimensi_10  
+di             0.071720  -0.082811   0.039474  -0.059706   -0.081165  
+cepat          0.057213   0.002645  -0.074377   0.067950   -0.009923  
+dengan         0.028776  -0.019529   0.064559   0.009083   -0.011331  
+melaju        -0.087237   0.071658   0.065526  -0.044648    0.026333  
+merah          0.094161  -0.010898   0.078657   0.035576    0.055643  
+mobil         -0.091239   0.009314  -0.069142   0.048675    0.036610  
+perpustakaan  -0.034835   0.081107  -0.025908  -0.084731   -0.006089  
+buku          -0.004859  -0.033961  -0.054618   0.012900    0.033963  
+membaca        0.040053  -0.080555  -0.037527   0.053569    0.066452  
+anak          -0.042319  -0.052121   0.036516   0.027339   -0.072085  
+sofa           0.057385   0.056073   0.032970  -0.005687    0.041033  
+atas           0.013748  -0.092548  -0.072041  -0.050904   -0.077094  
+tidur          0.013047  -0.084161   0.053000   0.014920    0.026944  
+kucing        -0.039210   0.020568  -0.093836  -0.030500   -0.012657  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 7. Informasi vektor</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">----------------------------------------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Informasi Vektor"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah kata      :"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">kata</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dimensi per kata :"</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">vector_size</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ukuran matriks   :"</span><span class="p">,</span> <span class="n">vektor</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Informasi Vektor
+----------------------------------------
+Jumlah kata      : 14
+Dimensi per kata : 10
+Ukuran matriks   : (14, 10)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="modelling.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Modelling</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="clasifikasi_skipgram.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Skip-gram (Word Embedding)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yunika Lestari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
