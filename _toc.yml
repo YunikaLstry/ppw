@@ -7,3 +7,5 @@ chapters:
   - file: prosesTF-IDF
   - file: PCA
   - file: modelling
+  - file: skipgram
+  - file: clasifikasi_skipgram
