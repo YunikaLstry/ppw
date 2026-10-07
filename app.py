@@ -724,7 +724,7 @@ elif menu == "🧠 Model Word2Vec & PCA":
                 st.dataframe(sim_df[["Kata Serupa", "Similarity (%)"]], use_container_width=True)
                 
                 fig, ax = plt.subplots(figsize=(5, 3))
-                sns.barplot(x="Cosine Similarity", y="Kata Serupa", data=sim_df, palette="Blues_r", ax=ax)
+                sns.barplot(x="Cosine Similarity", y="Kata Serupa", data=sim_df, hue="Kata Serupa", palette="Blues_r", legend=False, ax=ax)
                 ax.set_title(f"Kata Terdekat untuk: '{target_word}'", fontweight="bold")
                 st.pyplot(fig)
             else:
@@ -735,11 +735,15 @@ elif menu == "🧠 Model Word2Vec & PCA":
         st.caption("Visualisasi 200 dokumen berita yang telah direduksi dari 100 dimensi menjadi Komponen Utama (PC1 & PC2).")
         
         if df_pca is not None and 'PC1' in df_pca.columns and 'PC2' in df_pca.columns:
+            plot_pca = df_pca.copy()
+            label_map_display = {0: 'Finance', 1: 'Sport', '0': 'Finance', '1': 'Sport', 'finance': 'Finance', 'sport': 'Sport'}
+            plot_pca['Kategori'] = plot_pca['label'].map(label_map_display).fillna('Unknown')
+            
             fig, ax = plt.subplots(figsize=(5.5, 4.2))
             sns.scatterplot(
-                x='PC1', y='PC2', hue='label',
-                data=df_pca,
-                palette={'finance': '#10b981', 'sport': '#3b82f6'},
+                x='PC1', y='PC2', hue='Kategori',
+                data=plot_pca,
+                palette={'Finance': '#10b981', 'Sport': '#3b82f6'},
                 alpha=0.85, s=70, edgecolor='black', linewidth=0.5,
                 ax=ax
             )
