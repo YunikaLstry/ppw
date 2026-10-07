@@ -9,7 +9,11 @@ import streamlit as st
 from PIL import Image
 import requests
 from bs4 import BeautifulSoup
-import trafilatura
+try:
+    import trafilatura
+    HAS_TRAFILATURA = True
+except ImportError:
+    HAS_TRAFILATURA = False
 from gensim.models import Word2Vec
 from sklearn.metrics import classification_report, confusion_matrix
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
@@ -232,29 +236,33 @@ def scrape_article_from_url(url):
     }
     
     try:
-        # 1. Coba download dengan Trafilatura
-        downloaded = trafilatura.fetch_url(url)
-        if downloaded:
-            extracted_text = trafilatura.extract(
-                downloaded,
-                include_comments=False,
-                include_tables=False,
-                no_fallback=False
-            )
-            metadata = trafilatura.extract_metadata(downloaded)
-            
-            if metadata:
-                if metadata.title:
-                    result["title"] = metadata.title
-                if metadata.author:
-                    result["author"] = metadata.author
-                if metadata.date:
-                    result["date"] = metadata.date
+        # 1. Coba download dengan Trafilatura jika modul tersedia
+        if HAS_TRAFILATURA:
+            try:
+                downloaded = trafilatura.fetch_url(url)
+                if downloaded:
+                    extracted_text = trafilatura.extract(
+                        downloaded,
+                        include_comments=False,
+                        include_tables=False,
+                        no_fallback=False
+                    )
+                    metadata = trafilatura.extract_metadata(downloaded)
                     
-            if extracted_text and len(extracted_text.strip()) > 50:
-                result["text"] = extracted_text.strip()
-                result["success"] = True
-                return result
+                    if metadata:
+                        if metadata.title:
+                            result["title"] = metadata.title
+                        if metadata.author:
+                            result["author"] = metadata.author
+                        if metadata.date:
+                            result["date"] = metadata.date
+                            
+                    if extracted_text and len(extracted_text.strip()) > 50:
+                        result["text"] = extracted_text.strip()
+                        result["success"] = True
+                        return result
+            except Exception:
+                pass
                 
         # 2. Fallback: requests + BeautifulSoup (khusus Detik.com / umum)
         headers = {

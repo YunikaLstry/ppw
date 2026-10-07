@@ -6,7 +6,6 @@ pandas
 numpy
 matplotlib
 seaborn
-trafilatura
 beautifulsoup4
 joblib
 Pillow
