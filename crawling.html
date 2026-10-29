@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Preprocessing data" href="preprocessing.html" />
-    <link rel="prev" title="Profile" href="profil.html" />
+    <link rel="prev" title="Catatan" href="catatan.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,23 +174,18 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="catatan.html">Catatan</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Crawling data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catatan.html">Catatan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prosesTF-IDF.html">Load Data Hasil Preprocessing</a></li>
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="PCA.html">Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)</a></li>
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="prosesTF-IDF.html">Proses TF-IDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCA.html">Tahapan PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dasar-skipgram.html">Dasar Skipgram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="skipgram_tanpa_pca.html">Skip-gram Tanpa PCA (Word Embedding)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelling.html">Modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="skipgram.html">Contoh Skipgram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clasifikasi_skipgram.html">Skip-gram (Word Embedding)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelling-w2v.html">Modelling</a></li>
+
+
 </ul>
 
     </div>
@@ -476,7 +471,7 @@ Note: you may need to restart the kernel to use updated packages.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Ambil URL</span>
-<span class="n">url_sport</span> <span class="o">=</span> <span class="n">get_detik_urls</span><span class="p">(</span><span class="s1">'https://sport.detik.com/indeks'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">url_sport</span> <span class="o">=</span> <span class="n">get_detik_urls</span><span class="p">(</span><span class="s1">'https://sport.detik.com/indeks'</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"-&gt; Total URL Sport yang didapatkan: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">url_sport</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Tampilkan sampel 5 URL Sport pertama</span>
@@ -486,7 +481,7 @@ Note: you may need to restart the kernel to use updated packages.
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">50</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">url_finance</span> <span class="o">=</span> <span class="n">get_detik_urls</span><span class="p">(</span><span class="s1">'https://finance.detik.com/indeks'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">url_finance</span> <span class="o">=</span> <span class="n">get_detik_urls</span><span class="p">(</span><span class="s1">'https://finance.detik.com/indeks'</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"-&gt; Total URL Finance yang didapatkan: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">url_finance</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Tampilkan sampel 5 URL Finance pertama</span>
@@ -498,26 +493,26 @@ Note: you may need to restart the kernel to use updated packages.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mengumpulkan URL dari https://sport.detik.com/indeks...
--&gt; Total URL Sport yang didapatkan: 100
+-&gt; Total URL Sport yang didapatkan: 101
 
 --- Sampel URL Sport (5 Pertama) ---
-1. https://sport.detik.com/g-sport/d-8666151/ketum-koni-tutup-program-sport-diplomacy-indonesia-timor-leste
-2. https://sport.detik.com/sport-lain/d-8666068/usai-dilantik-koni-ini-rencana-pengurus-pusat-kickboxing-indonesia
-3. https://sport.detik.com/sport-lain/d-8666076/lina-hisage-atlet-muda-potensial-cabor-tolak-peluru-dari-papua
-4. https://sport.detik.com/sport-lain/d-8665977/tim-equestrian-indonesia-turunkan-12-atlet-di-asian-games-2026
-5. https://sport.detik.com/moto-gp/d-8665638/marc-marquez-adalah-makhluk-mars
+1. https://sport.detik.com/sport-lain/d-8712175/sejarah-indonesia-jadi-tuan-rumah-asian-gym-for-life-challenge-2026
+2. https://sport.detik.com/sport-lain/d-8712155/fia-wec-sean-bawa-wrt-32-start-p6-di-barcelona
+3. https://sport.detik.com/sport-lain/d-8711896/fia-wec-sean-dan-farfus-di-barcelona-leung-di-portimao
+4. https://sport.detik.com/basket/d-8711836/jelang-ibl-hangtuah-perkuat-chemistry-dan-fondasi-pemain
+5. https://sport.detik.com/sport-lain/d-8711823/panahan-sumbang-emas-di-asian-games-2026-perpani-syukuran
 
 ==================================================
 
 Mengumpulkan URL dari https://finance.detik.com/indeks...
--&gt; Total URL Finance yang didapatkan: 100
+-&gt; Total URL Finance yang didapatkan: 101
 
 --- Sampel URL Finance (5 Pertama) ---
-1. https://finance.detik.com/infrastruktur/d-8665852/pramono-blak-blakan-ke-prabowo-minta-bantuan-rute-lrt-diperpanjang
-2. https://finance.detik.com/berita-ekonomi-bisnis/d-8665893/dua-dirjen-minta-perombakan-pejabat-era-purbaya-dibatalkan
-3. https://finance.detik.com/infrastruktur/d-8666137/blok-m-kota-tua-dan-misi-mrt-hidupkan-sudut-sudut-jakarta
-4. https://finance.detik.com/berita-ekonomi-bisnis/d-8666109/punya-usaha-baru-merintis-nggak-perlu-jasa-editor-modal-hp-dan-pelajari-di-sini
-5. https://finance.detik.com/energi/d-8666091/bbm-e20-mau-diproduksi-lahan-tebu-2-juta-ha-di-jawa-papua-disiapkan
+1. https://finance.detik.com/berita-ekonomi-bisnis/d-8712182/transmart-full-day-sale-sarung-bantal-sofa-cuma-rp-20-ribu
+2. https://finance.detik.com/berita-ekonomi-bisnis/d-8712264/begini-sistem-logistik-di-balik-gelaran-motogp-mandalika
+3. https://finance.detik.com/bursa-dan-valas/d-8712152/msci-ungkap-kondisi-pasar-modal-ri-kapitalisasi-anjlok-55-bobot-saham-0-43
+4. https://finance.detik.com/berita-ekonomi-bisnis/d-8712156/alat-makan-minum-banting-harga-di-transmart-full-day-sale
+5. https://finance.detik.com/bursa-dan-valas/d-8712110/bank-mandiri-buka-suara-soal-gadai-saham-perusahaan-haji-isam
 </pre></div>
 </div>
 </div>
@@ -531,41 +526,71 @@ Mengumpulkan URL dari https://finance.detik.com/indeks...
 <span class="n">data_sport</span> <span class="o">=</span> <span class="n">scrape_articles_content</span><span class="p">(</span><span class="n">url_sport</span><span class="p">,</span> <span class="s1">'sport'</span><span class="p">)</span>
 <span class="n">data_finance</span> <span class="o">=</span> <span class="n">scrape_articles_content</span><span class="p">(</span><span class="n">url_finance</span><span class="p">,</span> <span class="s1">'finance'</span><span class="p">)</span>
 
-<span class="c1"># 2. Cek dan Hapus Duplikat</span>
+<span class="c1"># 2. Gabungkan hasil ekstraksi</span>
 <span class="n">df_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_sport</span> <span class="o">+</span> <span class="n">data_finance</span><span class="p">)</span>
 
-<span class="c1"># Hitung jumlah duplikat berdasarkan URL dan Isi Berita</span>
+<span class="c1"># Periksa duplikat berdasarkan URL dan isi berita</span>
 <span class="n">dup_url</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'url'</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">dup_isi</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'isi_berita'</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
-<span class="c1"># Hapus data duplikat (menyimpan entri pertama)</span>
-<span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'isi_berita'</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="s1">'first'</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Tampilkan berita yang isi teksnya duplikat</span>
+<span class="n">berita_duplikat</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span>
+    <span class="n">df_raw</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'isi_berita'</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'isi_berita'</span><span class="p">)</span>
 
-<span class="c1"># Ringkasan Hasil</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- LAPORAN EKSTRAKSI &amp; PENGECEKAN DUPLIKAT ---"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"• Total berita diekstrak  : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_raw</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"• Duplikat berdasarkan URL : </span><span class="si">{</span><span class="n">dup_url</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"• Duplikat isi berita      : </span><span class="si">{</span><span class="n">dup_isi</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"• Total data bersih (unik) : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_clean</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Berita dengan isi duplikat:"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">berita_duplikat</span><span class="p">[[</span><span class="s1">'label'</span><span class="p">,</span> <span class="s1">'url'</span><span class="p">,</span> <span class="s1">'isi_berita'</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Ringkasan:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total hasil ekstraksi : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_raw</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Duplikat URL          : </span><span class="si">{</span><span class="n">dup_url</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Duplikat isi berita   : </span><span class="si">{</span><span class="n">dup_isi</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Memulai ekstraksi konten...
 
-🚀 Memulai ekstraksi 100 artikel [SPORT]...
-   └─ [100/100] Processing: https://sport.detik.com/sport-lain/d-8656039/ketum...
-✅ Selesai! Berhasil mengekstrak 100 konten [SPORT].
+🚀 Memulai ekstraksi 101 artikel [SPORT]...
+   └─ [101/101] Processing: https://sport.detik.com/moto-gp/d-8700929/klasemen...
+✅ Selesai! Berhasil mengekstrak 101 konten [SPORT].
 
-🚀 Memulai ekstraksi 100 artikel [FINANCE]...
-   └─ [100/100] Processing: https://finance.detik.com/energi/d-8663649/pertami...
-✅ Selesai! Berhasil mengekstrak 100 konten [FINANCE].
+🚀 Memulai ekstraksi 101 artikel [FINANCE]...
+   └─ [101/101] Processing: https://finance.detik.com/moneter/d-8709600/bank-b...
+✅ Selesai! Berhasil mengekstrak 101 konten [FINANCE].
+Berita dengan isi duplikat:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
---- LAPORAN EKSTRAKSI &amp; PENGECEKAN DUPLIKAT ---
-• Total berita diekstrak  : 200
-• Duplikat berdasarkan URL : 0
-• Duplikat isi berita      : 0
-• Total data bersih (unik) : 200
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+      <th>url</th>
+      <th>isi_berita</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ringkasan:
+Total hasil ekstraksi : 202
+Duplikat URL          : 0
+Duplikat isi berita   : 0
 </pre></div>
 </div>
 </div>
@@ -574,64 +599,46 @@ Mengumpulkan URL dari https://finance.detik.com/indeks...
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. Gabungkan Data, Buat Kolom ID, &amp; Simpan ke CSV</span>
 
-<span class="c1"># Menggunakan df_clean hasil pembersihan duplikat sebelumnya</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="c1"># Buat kolom ID berurutan dari 1 sampai total data</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Menggunakan df_clean hasil pembersihan duplikat sebelumnya</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Buat kolom ID berurutan mulai dari 1</span>
+<span class="n">df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 
 <span class="c1"># Pastikan urutan 4 fitur: id, isi_berita, label, url</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'isi_berita'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">,</span> <span class="s1">'url'</span><span class="p">]]</span>
 
+<span class="c1"># Tentukan lokasi penyimpanan</span>
+<span class="n">file_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'Data'</span><span class="p">,</span> <span class="s1">'dataset_detik.csv'</span><span class="p">)</span>
+
+<span class="c1"># Buat folder Data jika belum tersedia</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">'Data'</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
 <span class="c1"># Simpan ke CSV</span>
-<span class="n">file_output</span> <span class="o">=</span> <span class="s1">'dataset_detik.csv'</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">file_output</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8-sig'</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">file_output</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8-sig'</span>
+<span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Proses Selesai!"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total baris data tersimpan : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Daftar fitur tersimpan (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">) : </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Proses Selesai!
-Total baris data tersimpan : 200
-Daftar fitur tersimpan (4) : ['id', 'isi_berita', 'label', 'url']
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. Gabungkan Data &amp; Simpan ke CSV dengan Pandas</span>
-<span class="n">all_data</span> <span class="o">=</span> <span class="n">data_sport</span> <span class="o">+</span> <span class="n">data_finance</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">all_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Lokasi file                 : </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_output</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="c1"># Simpan CSV dengan encoding utf-8-sig</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'dataset_detik.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8-sig'</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Proses Selesai!"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total baris data tersimpan: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="c1"># Tampilkan 5 baris pertama</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proses Selesai!
-Total baris data tersimpan: 200
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tampilkan 5 baris pertama data</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Scraping Selesai! Data disimpan ke 'dataset_detik.csv'"</span><span class="p">)</span>
-<span class="n">df_preview</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scraping Selesai! Data disimpan ke 'dataset_detik.csv'
+Total baris data tersimpan : 199
+Daftar fitur tersimpan (4) : ['id', 'isi_berita', 'label', 'url']
+Lokasi file                 : d:\webmining\Data\dataset_detik.csv
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -662,37 +669,37 @@ Total baris data tersimpan: 200
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>Ketua Umum Komite Olahraga Nasional Indonesia ...</td>
+      <td>Indonesia mencatatkan sejarah di dunia senam. ...</td>
       <td>sport</td>
-      <td>https://sport.detik.com/g-sport/d-8666151/ketu...</td>
+      <td>https://sport.detik.com/sport-lain/d-8712175/s...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>Pengurus Pusat Kickboxing Indonesia (PP KBI) p...</td>
+      <td>Sean Gelael dan Team WRT 32 punya kans naik po...</td>
       <td>sport</td>
-      <td>https://sport.detik.com/sport-lain/d-8666068/u...</td>
+      <td>https://sport.detik.com/sport-lain/d-8712155/f...</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>Lina Hisage, atlet tolak peluru asal Wamena, P...</td>
+      <td>Tiga pebalap Team WRT 32 bakal bagi tugas akhi...</td>
       <td>sport</td>
-      <td>https://sport.detik.com/sport-lain/d-8666076/l...</td>
+      <td>https://sport.detik.com/sport-lain/d-8711896/f...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>Timnas Equestrian Indonesia sudah bertolak ke ...</td>
+      <td>Tim basket Hangtuah memanfaatkan turnamen pram...</td>
       <td>sport</td>
-      <td>https://sport.detik.com/sport-lain/d-8665977/t...</td>
+      <td>https://sport.detik.com/basket/d-8711836/jelan...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>Dalam dua seri terakhir MotoGP 2027, Marc Marq...</td>
+      <td>Atlet panahan Indonesia, Nurisa Dian Ashrifah,...</td>
       <td>sport</td>
-      <td>https://sport.detik.com/moto-gp/d-8665638/marc...</td>
+      <td>https://sport.detik.com/sport-lain/d-8711823/p...</td>
     </tr>
   </tbody>
 </table>
@@ -731,12 +738,12 @@ Total baris data tersimpan: 200
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="profil.html"
+       href="catatan.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Profile</p>
+        <p class="prev-next-title">Catatan</p>
       </div>
     </a>
     <a class="right-next"

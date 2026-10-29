@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://localhost:3000/sitemap_style.xsl" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://localhost:3000</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/crawling</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/preprocessing</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/catatan</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/prosestf-idf</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/pca</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/modelling</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/clasifikasi-skipgram</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/modelling-w2v</loc>
+  </url>
+</urlset>

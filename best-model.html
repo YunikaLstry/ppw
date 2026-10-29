@@ -1,0 +1,1602 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; Web Mining</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'best-model';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Modelling" href="modelling-w2v.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="profil.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/foto.JPG" class="logo__image only-light" alt="Web Mining - Home"/>
+    <script>document.write(`<img src="_static/foto.JPG" class="logo__image only-dark" alt="Web Mining - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="profil.html">
+                    Profile
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="catatan.html">Catatan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawling.html">Crawling data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prosesTF-IDF.html">Proses TF-IDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCA.html">Tahapan PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dasar-skipgram.html">Dasar Skipgram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="skipgram_tanpa_pca.html">Skip-gram Tanpa PCA (Word Embedding)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelling.html">Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clasifikasi_skipgram.html">Skip-gram (Word Embedding)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelling-w2v.html">Modelling</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/YunikaLstry/ppw" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/best-model.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># KLASIFIKASI BERITA DETIK</span>
+<span class="c1"># WORD2VEC SKIP-GRAM + GAUSSIAN NAIVE BAYES</span>
+<span class="c1"># TANPA PCA DAN TANPA MODEL PEMBANDING</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Word2Vec</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">accuracy_score</span><span class="p">,</span>
+    <span class="n">balanced_accuracy_score</span><span class="p">,</span>
+    <span class="n">classification_report</span><span class="p">,</span>
+    <span class="n">confusion_matrix</span><span class="p">,</span>
+    <span class="n">precision_score</span><span class="p">,</span>
+    <span class="n">recall_score</span><span class="p">,</span>
+    <span class="n">f1_score</span>
+<span class="p">)</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># KONFIGURASI</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+
+<span class="c1"># Path dataset relatif terhadap folder kerja notebook</span>
+<span class="n">BASE_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">BASE_DIR</span> <span class="o">/</span> <span class="s2">"Data"</span> <span class="o">/</span> <span class="s2">"detik_preprocessed.csv"</span>
+<span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">BASE_DIR</span> <span class="o">/</span> <span class="s2">"hasil_skipgram"</span>
+<span class="n">OUTPUT_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">LABEL_MAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"finance"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"sport"</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="n">LABEL_NAMES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Finance"</span><span class="p">,</span> <span class="s2">"Sport"</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"KLASIFIKASI BERITA DETIK"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Word2Vec Skip-gram + Gaussian Naive Bayes"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tanpa PCA dan tanpa model pembanding"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Folder kerja :"</span><span class="p">,</span> <span class="n">BASE_DIR</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dataset      :"</span><span class="p">,</span> <span class="n">DATA_PATH</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Folder hasil :"</span><span class="p">,</span> <span class="n">OUTPUT_DIR</span><span class="p">)</span>
+
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># TAHAP 1 — MEMUAT DAN MEMERIKSA DATASET</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TAHAP 1: MEMUAT DATASET"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">DATA_PATH</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"Dataset tidak ditemukan: </span><span class="si">{</span><span class="n">DATA_PATH</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="s2">"Pastikan detik_preprocessed.csv berada di folder Data."</span>
+    <span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Ukuran dataset awal:"</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Kolom tersedia:"</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+<span class="c1"># Deteksi kolom teks</span>
+<span class="k">if</span> <span class="s2">"isi_berita_clean"</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">TEXT_COLUMN</span> <span class="o">=</span> <span class="s2">"isi_berita_clean"</span>
+<span class="k">elif</span> <span class="s2">"isi_berita"</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">TEXT_COLUMN</span> <span class="o">=</span> <span class="s2">"isi_berita"</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+        <span class="s2">"Kolom teks tidak ditemukan. "</span>
+        <span class="sa">f</span><span class="s2">"Kolom yang tersedia: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
+    <span class="p">)</span>
+
+<span class="k">if</span> <span class="s2">"label"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+        <span class="s2">"Kolom 'label' tidak ditemukan."</span>
+    <span class="p">)</span>
+
+<span class="k">if</span> <span class="s2">"id"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"id"</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Seragamkan nama kolom teks untuk tahap berikutnya</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">TEXT_COLUMN</span><span class="p">:</span> <span class="s2">"isi_berita_clean"</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s2">"isi_berita_clean"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"isi_berita_clean"</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Distribusi label sebelum pembersihan:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="c1"># Hanya gunakan kelas Finance dan Sport</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">LABEL_MAP</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Hapus teks kosong</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"isi_berita_clean"</span><span class="p">]</span><span class="o">.</span><span class="n">ne</span><span class="p">(</span><span class="s2">""</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Hapus berita duplikat</span>
+<span class="n">jumlah_sebelum</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span>
+    <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"isi_berita_clean"</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">jumlah_duplikat</span> <span class="o">=</span> <span class="n">jumlah_sebelum</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Konversi label menjadi angka</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"label_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">LABEL_MAP</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Tokenisasi berdasarkan spasi.</span>
+<span class="c1"># Teks diasumsikan telah melalui preprocessing sebelumnya.</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"tokens"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"isi_berita_clean"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">text</span><span class="p">:</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"tokens"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s2">"label_id"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+        <span class="s2">"Dataset harus memiliki kedua kelas: Finance dan Sport."</span>
+    <span class="p">)</span>
+
+<span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s2">"label_id"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+        <span class="s2">"Setiap kelas minimal memiliki dua berita."</span>
+    <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Kolom teks yang digunakan:"</span><span class="p">,</span> <span class="n">TEXT_COLUMN</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah data setelah pembersihan:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah berita duplikat dihapus:"</span><span class="p">,</span> <span class="n">jumlah_duplikat</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Distribusi kelas:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+        <span class="n">index</span><span class="o">=</span><span class="p">{</span><span class="s2">"finance"</span><span class="p">:</span> <span class="s2">"Finance"</span><span class="p">,</span> <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"Sport"</span><span class="p">}</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Contoh teks:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"isi_berita_clean"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"dataset_model.csv"</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Dataset model disimpan."</span><span class="p">)</span>
+
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># TAHAP 2 — TRAIN-TEST SPLIT</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TAHAP 2: PEMBAGIAN DATA LATIH DAN DATA UJI"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="n">train_df</span><span class="p">,</span> <span class="n">test_df</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.20</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">,</span>
+    <span class="n">stratify</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">"label_id"</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s2">"label_id"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="s2">"label_id"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah seluruh data :"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah data latih    :"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_df</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah data uji      :"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_df</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Distribusi data latih:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">train_df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+        <span class="n">index</span><span class="o">=</span><span class="p">{</span><span class="s2">"finance"</span><span class="p">:</span> <span class="s2">"Finance"</span><span class="p">,</span> <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"Sport"</span><span class="p">}</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Distribusi data uji:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">test_df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+        <span class="n">index</span><span class="o">=</span><span class="p">{</span><span class="s2">"finance"</span><span class="p">:</span> <span class="s2">"Finance"</span><span class="p">,</span> <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"Sport"</span><span class="p">}</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Contoh data latih:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train_df</span><span class="p">[[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="n">train_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"data_latih.csv"</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+<span class="p">)</span>
+
+<span class="n">test_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"data_uji.csv"</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+<span class="p">)</span>
+
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># TAHAP 3 — WORD2VEC SKIP-GRAM</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TAHAP 3: PELATIHAN WORD2VEC SKIP-GRAM"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="n">sentences_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s2">"tokens"</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">w2v_model</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="p">(</span>
+    <span class="n">sentences</span><span class="o">=</span><span class="n">sentences_train</span><span class="p">,</span>
+    <span class="n">vector_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">sg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="n">SEED</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pelatihan Word2Vec selesai."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Metode             : Skip-gram"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Vector size        :"</span><span class="p">,</span> <span class="n">w2v_model</span><span class="o">.</span><span class="n">vector_size</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Window              :"</span><span class="p">,</span> <span class="n">w2v_model</span><span class="o">.</span><span class="n">window</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Minimum count       :"</span><span class="p">,</span> <span class="n">w2v_model</span><span class="o">.</span><span class="n">min_count</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Epochs              :"</span><span class="p">,</span> <span class="n">w2v_model</span><span class="o">.</span><span class="n">epochs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah kata unik    :"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Contoh kosakata:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
+
+<span class="n">w2v_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+    <span class="nb">str</span><span class="p">(</span><span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"w2v_model.model"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Model Word2Vec disimpan."</span><span class="p">)</span>
+
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># TAHAP 4 — VEKTOR KATA DAN KEMIRIPAN KATA</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TAHAP 4: ANALISIS VEKTOR KATA"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="n">target_word</span> <span class="o">=</span> <span class="s2">"saham"</span>
+
+<span class="k">if</span> <span class="n">target_word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="p">:</span>
+    <span class="c1"># Cari kata yang tersedia sebagai contoh</span>
+    <span class="n">target_word</span> <span class="o">=</span> <span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">"Kata 'saham' tidak ditemukan. "</span>
+        <span class="sa">f</span><span class="s2">"Kata contoh: '</span><span class="si">{</span><span class="n">target_word</span><span class="si">}</span><span class="s2">'"</span>
+    <span class="p">)</span>
+
+<span class="n">word_vector</span> <span class="o">=</span> <span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">target_word</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Kata target:"</span><span class="p">,</span> <span class="n">target_word</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dimensi vektor:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_vector</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Vektor kata:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_vector</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Lima nilai pertama:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_vector</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">similar_words</span> <span class="o">=</span> <span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span>
+        <span class="n">target_word</span><span class="p">,</span>
+        <span class="n">topn</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">similar_words</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">similarity_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">similar_words</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"kata"</span><span class="p">,</span> <span class="s2">"skor_kemiripan"</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Kata paling mirip:"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">similarity_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Tidak ada kata pembanding dalam kosakata."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">similarity_df</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="n">vector_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">word_vector</span><span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
+        <span class="sa">f</span><span class="s2">"dimensi_</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_vector</span><span class="p">))</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">vector_df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"kata"</span><span class="p">,</span> <span class="n">target_word</span><span class="p">)</span>
+
+<span class="n">vector_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"hasil_vektor_kata_skipgram.csv"</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+<span class="p">)</span>
+
+<span class="n">similarity_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"hasil_kemiripan_kata_skipgram.csv"</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">similarity_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">similarity_df</span><span class="p">,</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">"skor_kemiripan"</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="s2">"kata"</span>
+    <span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kemiripan Kata dengan '</span><span class="si">{</span><span class="n">target_word</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Skor Kemiripan"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Kata"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+        <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"visualisasi_kemiripan_kata.png"</span><span class="p">,</span>
+        <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+        <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span>
+    <span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Hasil analisis vektor kata disimpan."</span><span class="p">)</span>
+
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># TAHAP 5 — MEMBENTUK VEKTOR DOKUMEN</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TAHAP 5: MEMBENTUK VEKTOR DOKUMEN"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_document_vector</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Vektor dokumen dihitung dari rata-rata vektor kata</span>
+<span class="sd">    yang dikenal oleh model Word2Vec.</span>
+<span class="sd">    """</span>
+    <span class="n">vectors</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">token</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">vectors</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">vector_size</span><span class="p">,</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vectors</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="n">X_train_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span>
+    <span class="n">get_document_vector</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">w2v_model</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">train_df</span><span class="p">[</span><span class="s2">"tokens"</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="n">X_test_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span>
+    <span class="n">get_document_vector</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">w2v_model</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">test_df</span><span class="p">[</span><span class="s2">"tokens"</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Bentuk X_train_vec:"</span><span class="p">,</span> <span class="n">X_train_vec</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Bentuk X_test_vec :"</span><span class="p">,</span> <span class="n">X_test_vec</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">zero_train</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">X_train_vec</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">zero_test</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">X_test_vec</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Vektor nol data latih:"</span><span class="p">,</span> <span class="n">zero_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Vektor nol data uji  :"</span><span class="p">,</span> <span class="n">zero_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Contoh lima dimensi pertama dari tiga dokumen latih:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_train_vec</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="n">zero_train</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">zero_test</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">"</span><span class="se">\n</span><span class="s2">PERINGATAN: terdapat dokumen dengan vektor nol. "</span>
+        <span class="s2">"Periksa kesesuaian preprocessing dan kosakata."</span>
+    <span class="p">)</span>
+
+<span class="n">train_vectors_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">X_train_vec</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
+        <span class="sa">f</span><span class="s2">"dimensi_</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X_train_vec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">train_vectors_df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"id"</span><span class="p">,</span> <span class="n">train_df</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+<span class="n">train_vectors_df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">test_vectors_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">X_test_vec</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
+        <span class="sa">f</span><span class="s2">"dimensi_</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X_test_vec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">test_vectors_df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"id"</span><span class="p">,</span> <span class="n">test_df</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+<span class="n">test_vectors_df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">train_vectors_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"vektor_dokumen_latih.csv"</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+<span class="p">)</span>
+
+<span class="n">test_vectors_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"vektor_dokumen_uji.csv"</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Vektor dokumen berhasil disimpan."</span><span class="p">)</span>
+
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># TAHAP 6 — KLASIFIKASI GAUSSIAN NAIVE BAYES</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TAHAP 6: KLASIFIKASI GAUSSIAN NAIVE BAYES"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="n">model_gnb</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+
+<span class="n">model_gnb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">X_train_vec</span><span class="p">,</span>
+    <span class="n">y_train</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Model berhasil dilatih."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Representasi teks : Word2Vec Skip-gram"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Algoritma         : Gaussian Naive Bayes"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"PCA               : Tidak digunakan"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah fitur      :"</span><span class="p">,</span> <span class="n">X_train_vec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Jumlah data latih per kelas:"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s2">"Kelas"</span><span class="p">:</span> <span class="n">LABEL_NAMES</span><span class="p">,</span>
+        <span class="s2">"Jumlah"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_train</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)),</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_train</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">]</span>
+    <span class="p">})</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
+    <span class="n">model_gnb</span><span class="p">,</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"gnb_model.pkl"</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Model GaussianNB disimpan."</span><span class="p">)</span>
+
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># TAHAP 7 — EVALUASI MODEL</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TAHAP 7: EVALUASI WORD2VEC SKIP-GRAM + GAUSSIANNB"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model_gnb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_vec</span><span class="p">)</span>
+
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">balanced_acc</span> <span class="o">=</span> <span class="n">balanced_accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="n">precision_macro</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span>
+    <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">"macro"</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="n">recall_macro</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span>
+    <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">"macro"</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="n">f1_macro</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span>
+    <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">"macro"</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="n">precision_weighted</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span>
+    <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">"weighted"</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="n">recall_weighted</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span>
+    <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">"weighted"</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="n">f1_weighted</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span>
+    <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s2">"weighted"</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="c1"># Semua metrik disimpan sebagai angka 0–1</span>
+<span class="n">hasil_metrik</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span>
+    <span class="s2">"Model"</span><span class="p">:</span> <span class="s2">"Word2Vec Skip-gram + GaussianNB"</span><span class="p">,</span>
+    <span class="s2">"Accuracy"</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">,</span>
+    <span class="s2">"Balanced Accuracy"</span><span class="p">:</span> <span class="n">balanced_acc</span><span class="p">,</span>
+    <span class="s2">"Precision Macro"</span><span class="p">:</span> <span class="n">precision_macro</span><span class="p">,</span>
+    <span class="s2">"Recall Macro"</span><span class="p">:</span> <span class="n">recall_macro</span><span class="p">,</span>
+    <span class="s2">"F1 Macro"</span><span class="p">:</span> <span class="n">f1_macro</span><span class="p">,</span>
+    <span class="s2">"Precision Weighted"</span><span class="p">:</span> <span class="n">precision_weighted</span><span class="p">,</span>
+    <span class="s2">"Recall Weighted"</span><span class="p">:</span> <span class="n">recall_weighted</span><span class="p">,</span>
+    <span class="s2">"F1 Weighted"</span><span class="p">:</span> <span class="n">f1_weighted</span>
+<span class="p">}])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">A. METRIK EVALUASI KESELURUHAN"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">kolom</span> <span class="ow">in</span> <span class="n">hasil_metrik</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">kolom</span> <span class="o">==</span> <span class="s2">"Model"</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">kolom</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">hasil_metrik</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">kolom</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">nilai</span> <span class="o">=</span> <span class="n">hasil_metrik</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">kolom</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">kolom</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">nilai</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">nilai</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+
+<span class="c1"># Classification report</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">B. CLASSIFICATION REPORT"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="n">report_dict</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span>
+    <span class="n">y_test</span><span class="p">,</span>
+    <span class="n">y_pred</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">target_names</span><span class="o">=</span><span class="n">LABEL_NAMES</span><span class="p">,</span>
+    <span class="n">output_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="n">report_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">report_dict</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">report_df</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+
+<span class="c1"># Simpan metrik dan classification report</span>
+<span class="n">hasil_metrik</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"hasil_evaluasi.csv"</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+<span class="p">)</span>
+
+<span class="n">report_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"classification_report.csv"</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+<span class="p">)</span>
+
+<span class="c1"># Grafik metrik utama</span>
+<span class="n">metrik_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"Metrik"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Accuracy"</span><span class="p">,</span>
+        <span class="s2">"Balanced Accuracy"</span><span class="p">,</span>
+        <span class="s2">"Precision Macro"</span><span class="p">,</span>
+        <span class="s2">"Recall Macro"</span><span class="p">,</span>
+        <span class="s2">"F1 Macro"</span>
+    <span class="p">],</span>
+    <span class="s2">"Nilai"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="n">accuracy</span><span class="p">,</span>
+        <span class="n">balanced_acc</span><span class="p">,</span>
+        <span class="n">precision_macro</span><span class="p">,</span>
+        <span class="n">recall_macro</span><span class="p">,</span>
+        <span class="n">f1_macro</span>
+    <span class="p">]</span>
+<span class="p">})</span>
+
+<span class="n">metrik_plot</span><span class="p">[</span><span class="s2">"Persentase"</span><span class="p">]</span> <span class="o">=</span> <span class="n">metrik_plot</span><span class="p">[</span><span class="s2">"Nilai"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">metrik_plot</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"Metrik"</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">"Persentase"</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Nilai (%)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Metrik Evaluasi"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Evaluasi Word2Vec Skip-gram + GaussianNB"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">"</span><span class="si">%.2f%%</span><span class="s2">"</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"right"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"grafik_evaluasi_skipgram.png"</span><span class="p">,</span>
+    <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+    <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># TAHAP 8 — CONFUSION MATRIX</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TAHAP 8: CONFUSION MATRIX"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span>
+    <span class="n">y_test</span><span class="p">,</span>
+    <span class="n">y_pred</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Urutan kelas: Finance, Sport"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Confusion matrix:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">cm</span><span class="p">,</span>
+    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fmt</span><span class="o">=</span><span class="s2">"d"</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">"Blues"</span><span class="p">,</span>
+    <span class="n">xticklabels</span><span class="o">=</span><span class="n">LABEL_NAMES</span><span class="p">,</span>
+    <span class="n">yticklabels</span><span class="o">=</span><span class="n">LABEL_NAMES</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Confusion Matrix - Word2Vec Skip-gram + GaussianNB"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Label Prediksi"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Label Aktual"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"confusion_matrix_skipgram.png"</span><span class="p">,</span>
+    <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+    <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># TAHAP 9 — HASIL PREDIKSI DATA UJI</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TAHAP 9: HASIL PREDIKSI DATA UJI"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="n">hasil_prediksi</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span>
+    <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"isi_berita_clean"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">]</span>
+<span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">hasil_prediksi</span><span class="p">[</span><span class="s2">"label_aktual_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_test</span>
+<span class="n">hasil_prediksi</span><span class="p">[</span><span class="s2">"label_prediksi_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_pred</span>
+
+<span class="n">hasil_prediksi</span><span class="p">[</span><span class="s2">"label_aktual"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">hasil_prediksi</span><span class="p">[</span><span class="s2">"label_aktual_id"</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="s2">"Finance"</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">"Sport"</span><span class="p">})</span>
+<span class="p">)</span>
+
+<span class="n">hasil_prediksi</span><span class="p">[</span><span class="s2">"label_prediksi"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">hasil_prediksi</span><span class="p">[</span><span class="s2">"label_prediksi_id"</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="s2">"Finance"</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">"Sport"</span><span class="p">})</span>
+<span class="p">)</span>
+
+<span class="n">hasil_prediksi</span><span class="p">[</span><span class="s2">"hasil"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+    <span class="n">hasil_prediksi</span><span class="p">[</span><span class="s2">"label_aktual_id"</span><span class="p">]</span>
+    <span class="o">==</span> <span class="n">hasil_prediksi</span><span class="p">[</span><span class="s2">"label_prediksi_id"</span><span class="p">],</span>
+    <span class="s2">"Benar"</span><span class="p">,</span>
+    <span class="s2">"Salah"</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Sepuluh contoh hasil prediksi:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hasil_prediksi</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Ringkasan hasil prediksi:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hasil_prediksi</span><span class="p">[</span><span class="s2">"hasil"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+
+<span class="n">hasil_prediksi</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"hasil_prediksi_data_uji.csv"</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+<span class="p">)</span>
+
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># TAHAP 10 — SIMPAN MODEL DAN METADATA</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TAHAP 10: SIMPAN MODEL DAN METADATA"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"GaussianNB"</span><span class="p">,</span>
+    <span class="s2">"representasi_teks"</span><span class="p">:</span> <span class="s2">"Word2Vec Skip-gram"</span><span class="p">,</span>
+    <span class="s2">"vector_size"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"window"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">"min_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"sg"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"epochs"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">"pca_used"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"label_map"</span><span class="p">:</span> <span class="n">LABEL_MAP</span><span class="p">,</span>
+    <span class="s2">"label_names"</span><span class="p">:</span> <span class="n">LABEL_NAMES</span><span class="p">,</span>
+    <span class="s2">"random_seed"</span><span class="p">:</span> <span class="n">SEED</span>
+<span class="p">}</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span>
+    <span class="n">metadata</span><span class="p">,</span>
+    <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"metadata_model.pkl"</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Model dan metadata berhasil disimpan."</span><span class="p">)</span>
+
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># TAHAP 11 — PREDIKSI BERITA BARU</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TAHAP 11: PREDIKSI BERITA BARU"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">prediksi_berita_baru</span><span class="p">(</span><span class="n">teks</span><span class="p">,</span> <span class="n">model_w2v</span><span class="p">,</span> <span class="n">model_gnb</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">teks</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">teks</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Teks berita tidak boleh kosong."</span><span class="p">)</span>
+
+    <span class="c1"># Teks sebaiknya telah melalui preprocessing yang sama</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">teks</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+    <span class="n">jumlah_token_dikenal</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="n">token</span> <span class="ow">in</span> <span class="n">model_w2v</span><span class="o">.</span><span class="n">wv</span>
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">jumlah_token_dikenal</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"Tidak ada token yang dikenal Word2Vec. "</span>
+            <span class="s2">"Gunakan teks dengan preprocessing yang sama "</span>
+            <span class="s2">"seperti dataset pelatihan."</span>
+        <span class="p">)</span>
+
+    <span class="n">vector</span> <span class="o">=</span> <span class="n">get_document_vector</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">model_w2v</span><span class="p">)</span>
+    <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">prediksi_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">model_gnb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">vector</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">probabilitas</span> <span class="o">=</span> <span class="n">model_gnb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">vector</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">"teks"</span><span class="p">:</span> <span class="n">teks</span><span class="p">,</span>
+        <span class="s2">"jumlah_token"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">),</span>
+        <span class="s2">"jumlah_token_dikenal"</span><span class="p">:</span> <span class="n">jumlah_token_dikenal</span><span class="p">,</span>
+        <span class="s2">"prediksi"</span><span class="p">:</span> <span class="n">LABEL_NAMES</span><span class="p">[</span><span class="n">prediksi_id</span><span class="p">],</span>
+        <span class="s2">"probabilitas_finance"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">probabilitas</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+        <span class="s2">"probabilitas_sport"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">probabilitas</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">}</span>
+
+
+<span class="n">berita_uji</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"IHSG bergerak menguat seiring peningkatan volume "</span>
+    <span class="s2">"transaksi saham di pasar modal"</span>
+<span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">hasil_berita_baru</span> <span class="o">=</span> <span class="n">prediksi_berita_baru</span><span class="p">(</span>
+        <span class="n">berita_uji</span><span class="p">,</span>
+        <span class="n">w2v_model</span><span class="p">,</span>
+        <span class="n">model_gnb</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Teks:"</span><span class="p">,</span> <span class="n">hasil_berita_baru</span><span class="p">[</span><span class="s2">"teks"</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Prediksi:"</span><span class="p">,</span> <span class="n">hasil_berita_baru</span><span class="p">[</span><span class="s2">"prediksi"</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">"Probabilitas Finance:"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">hasil_berita_baru</span><span class="p">[</span><span class="s1">'probabilitas_finance'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">"Probabilitas Sport:"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">hasil_berita_baru</span><span class="p">[</span><span class="s1">'probabilitas_sport'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span>
+    <span class="p">)</span>
+
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">hasil_berita_baru</span><span class="p">])</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+        <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"hasil_prediksi_berita_baru.csv"</span><span class="p">,</span>
+        <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+    <span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Prediksi tidak dapat dilakukan:"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># TAHAP 12 — RINGKASAN FILE OUTPUT</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"TAHAP 12: RINGKASAN OUTPUT"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()):</span>
+    <span class="k">if</span> <span class="n">filepath</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">filepath</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> "</span>
+            <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="n">filepath</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> KB)"</span>
+        <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Lokasi hasil:"</span><span class="p">,</span> <span class="n">OUTPUT_DIR</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===========================================================================
+KLASIFIKASI BERITA DETIK
+Word2Vec Skip-gram + Gaussian Naive Bayes
+Tanpa PCA dan tanpa model pembanding
+===========================================================================
+
+Folder kerja : d:\webmining
+Dataset      : d:\webmining\Data\detik_preprocessed.csv
+Folder hasil : d:\webmining\hasil_skipgram
+
+===========================================================================
+TAHAP 1: MEMUAT DATASET
+===========================================================================
+
+Ukuran dataset awal: (199, 3)
+Kolom tersedia: ['id', 'isi_berita_clean', 'label']
+
+Distribusi label sebelum pembersihan:
+label
+sport      100
+finance     99
+Name: count, dtype: int64
+
+Kolom teks yang digunakan: isi_berita_clean
+Jumlah data setelah pembersihan: 198
+Jumlah berita duplikat dihapus: 1
+
+Distribusi kelas:
+label
+Sport      99
+Finance    99
+Name: count, dtype: int64
+
+Contoh teks:
+ id                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              isi_berita_clean label
+  1                                                                                                                                                                                                                                                    indonesia catat sejarah di dunia senam mereka jadi tuan rumah pertama untuk ajang asi gym fo life challenge ajang nama lengkap st asi gym for life challenge presented by poza sport academy langsung di gelanggang inovasi dan kreativitas universitas gadjah mada gik ugm yogyakarta oktober ajang perdana di bawah naung asi gymnastics union agu ini hadir grup dari tujuh negara yakni indonesia grup sri lanka jepang korea selatan malaysia thailand dan denmark ada lima eksper yang tindak bagai evaluator dalam gelar ini mereka adalah arak tatsuo dan yumiko itoh asal jepang monika siskova dari slovakia junghyun choi asal korea selatan serta denny malik dari indonesia ketua umum federasi gimnastik indonesia ita yuliati apresiasi percaya agu kepada indonesia untuk jadi tuan rumah edisi perdana sekaligus tegas bahwa gymnastics for all bawa pesan sama tanpa batas usia maupun latar belakang apresiasi kepada agu yang telah percaya selenggara asi gym for life challenge edisi perdana kepada indonesia ini bukan tentang dari mana kita asal berapa usia kita atau bahasa apa yang kita guna lalu gimnastik kita dapat hubung raya sama dan saling inspirasi ujar ita dalam sambut st asi gym for life challenge resmi buka oleh anggota komite eksekutif world gymnastics sekaligus wakil presiden agu zona asia tenggara srayuth patanasak turut hadir wakil ketua tim gerak pkk diy gusti kanjeng bendara raden ayu adipati gkbraa paku alam yang rupa istri wakil gubernur diy kgpaa paku alam x dalam sambut srayuth apresiasi komitmen indonesia yang dalam beberapa tahun akhir aktif jadi tuan rumah bagai ajang gimnastik internasional indonesia rupa tuan rumah yang luar biasa selamat kepada federasi gimnastik indonesia di bawah pimpin ita yuliati atas dedikasi dan komitmen hadir ajang perdana ini kita tahu bahwa indonesia makin aktif selenggara bagai ajang gimnastik internasional ujar srayuth selenggara ini makin kuat rekam jejak indonesia dalam gelar ajang gimnastik tingkat asia dan dunia pada indonesia sukses jadi tuan rumah rd fig artistic gymnastics world championships di indonesia arena jakarta belum indonesia juga pernah gelar th junior artistic gymnastics asi championships pada di istora senayan jakarta gymnastics for all rupa disiplin dalam world gymnastics yang depan partisipasi inklusif bagi masyarakat dari bagai usia tingkat mampu dan latar belakang mrp yna sport
+  2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   sean gelael dan team wrt punya kans naik podium di hours of barcelona sebab mereka akan start dari posisi enam ini berkat tampil solid pada sesi kualifikasi kelas lmgt fia world endurance championship di circuit de barcelona catalunya sabtu darren leung yang absen panjang jumat karena ikut program balap lain di gt world challenge europe di portimao portugal langsung beri banyak tugas pada free practice telah itu balap inggris sebut mampu jalan peran bagus di babak qualifying ketika hasil lolos tim ke sesi hyperpole leung ada di p sean punya tugas tidak mudah di hyperpole dengan mobil yang lebih berat karena regulasi balance of performance bop susul menang wrt pada putar belum di fuji jepang sean mampu bawa mobil bmw m di p start dari p tentu bukan posisi yang buruk dan jalan balap prediksi makin tarik karena karena kira bakal turun hujam walau begitu sean leung dan augusto farfus nyata siap dengan segala kondisi yang mereka hadap besok sean dan darren telah laku tugas dengan sangat baik sehingga kita bisa di p dan untuk balap besok kami ingin jalan balap hebat lagi kata farfus dalam rilis kepada detiksport pole position kelas lmgt rebut oleh tim garage lewat balap tom flemming sementara itu tim debut genesis magma racing cara kejut akan start depan di kelas hypercar lewat balap mathys jaubert race hours of barcelona bisa saksi langsung via livestreaming di youtube kuy entertainment minggu mulai pukul wib sean partisipasi di fia wec berkat dukung dari kfc indonesia pertamax turbo pertamina fastron telkomsel dan bank aladin syariah mrp adp sport
+  3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  tiga balap team wrt bakal bagi tugas akhir pekan ini sean gelael dan augusto farfus fokus di fia wec sementara darren leung harus tampil di gtwce dua free practice fp hours of barcelona jumat bagi team wrt hanya laku oleh sean dan farfus karena leung ada di portimao untuk ajang gt world challenge europe farfus buat catat menit detik dan tempat wrt di p pada fp sementara pada fp yang lebih utama laku race run sean buat menit detik untuk ada di p leung yang panjang jumat ada di portimao untuk tuntas fp dan qualifying gt world challenge europe baru gabung dengan sean dan farfus pada sesi fp dan kualifikasi sabtu hadir leung sangat penting di babak qualifying karena cuma balap bronze yang boleh ikut sesi sebut sean silver dan farfus platinum larang tampil bila leung bisa masuk top qualifying baru sean yang tugas di babak hyperpole saya akan bolak balik hari sabtu telah qualifying di wec barcelona saya langsung terbang ke portimao lagi untuk ikut race gtwce tak lama telah tiba di sana telah race di portimao saya terbang lagi ke barcelona ujar leung dalam terang kepada detiksport race hours of barcelona bisa saksi langsung via livestreaming di youtube kuy entertainment minggu mulai pukul wib mrp yna sport
+  4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         tim basket hangtuah manfaat turnamen pramusim all indonesian itu demi bangun fondasi dan kuat chemistry jelang ibl tim yang baru mulai siap sekitar satu tengah bulan ini memang masih dalam tahap kejar tinggal proses rekrutmen yang cepatmenjadi kunci untuk bisa tampil di pramusim yang langsung di bogor mulai oktober hingga november ini so far memang siap kami belum sempurna tapi ya dengan waktu yang ada kami coba kejar lah coba catching up kata latih hangtuah raden yohanes kristian dalam jumpa pers kenal main di kawasan jakarta selatan sabtu raden juga tegas bahwa fokus utama tim di all indonesian adalah lihat jauh mana fondasi awal bentuk ini kan kalau bilang kami reset lagi awal lagi dari main main yang kami rekrut kolaborasi dengan main yang masih stay juga jadi saya mau lihat fondasi awal kami itu jauh mana untuk liga nanti tutur salah satu rekrut baru hangtuah teemo tan ungkap hal nada bagai main ia akan usaha untuk percaya apa yang jadi strategi latih demi maju tim lebih ke chemistry juga saya bagai main fully trust ke coaches apa instruksi tanggung jawab saya jalan dengan persen ujar teemo teemo rupa mantan main prawira bandung putus gabung dengan hangtuah jadi sempat besar untuk apalagi comeback ke bandung tahu hangtuah tengah dalam upaya pindah kandang dari jakarta ke bandung bisa bilang alas cara garis besar hangtuah kasih sempat yang paling bagus lah banding semua terus tambah lagi karena ada sempat buat kembali ke bandung kok enak ujar teemo karena bandung tuh sudah bisa bilang jadi rumah buat saya jadi kayak buat bela bandung tuh sesuatu hal yang sangat besar buat saya lanjut manajemen hangtuah tak beban tim target tinggi di pramusim nanti selain performa selamat main jadi priorita agar siap persen saat liga mulai januari kami jalan game by game dengan maksimal mungkin yang penting selain performa bagus selamat main juga lebih penting tuju liga kata raden sementara untuk ibl hangtuah bidik peringkat lebih baik dari musim belum yakni ranking tujuh target dari manajemen adalah peringkat yang lebih baik dari tahun lalu pungkas raden mcy aff sport
+  5 atlet panah indonesia nurisa dian ashrifah dapat apresiasi besar telah cetak sejarah dengan raih medali emas nomor women s individual pada asi games di jepang nurisa terima bonus uang tunai rp miliar dan buah mobil listrik bonus rp miliar beri oleh ketua satu panah indonesia pan arsjad rasjid sementara itu mobil listrik serah oleh manajer tim panah indonesia azis armand beri bonus sebut laku dalam acara tajuk syukur medali emas panah indonesia di beranda kitchen jakarta selatan jumat malam wib acara itu turut hadir ketua noc indonesia raja sapta oktohari serta ketua akuatik indonesia anindya bakrie prestasi nurisa yang akrab sapa hani jadi catat sejarah bagi panah indonesia medali emas sebut rupa emas pertama yang hasil raih atlet panah indonesia panjang keikutsertaan di asi games arsjad rasjid ungkap rasa syukur sekaligus bangga atas capai sebut turut hasil hani tidak lepas dari kerja keras atlet dukung tim serta doa bagai pihak hari ini adalah hari yang kita syukur kita syukur karena indonesia tidak pernah tang emas di asi games dan ini adalah pertama kali untuk panah indonesia ujar arsjad ia juga sorot hasil tim panah indonesia lewat saing korea selatan yang kenal bagai salah satu kuat utama dunia dalam cabang olahraga sebut bagi arsjad capai ini jadi modal penting untuk hadap target ikut yakni olimpiade di los angeles amerika serikat ia harap hasil hani dapat jadi motivasi bagi atlet dan latih panah indonesia untuk terus tingkat prestasi di tingkat internasional ini adalah ukir sejarah selain kerja keras atlet tetapi juga perlu dukung dan doa harap insyaallah kita bisa dapat medali yang lebih baik lagi nanti di olimpiade kata sementara itu hani aku syukur atas apresiasi yang beri telah hasil sembah emas untuk indonesia atlet usia tahun sebut sampai terima kasih kepada arsjad rasjid azis armand dan iman atas dukung yang terima hani juga aku tidak sangka bisa langsung raih medali emas pada tampil perdana di asi games pertama terima kasih banyak untuk pak arsjad rasjid pak azis dan pak iman yang telah beri apresiasi yang sangat kesan bagi saya tutur hani hasil di asi games makin mantap tekad hani untuk kejar sempat tampil di olimpiade ia aku telah lama simpan impi untuk laga di ajang olahraga besar di dunia sebut iya ingin sekali karena memang dari dulu saya ingin moga bisa ikut olimpiade ujar hani pun harap suatu saat dapat sembah medali olimpiade bagi indonesia bagi capai sebut akan jadi hadiah yang sangat istimewa dalam jalan karier bagai atlet panah jika saya bisa sempat untuk menang medali olimpiade itu suatu hadiah yang spesial buat saya ungkap ran aff sport
+
+Dataset model disimpan.
+
+===========================================================================
+TAHAP 2: PEMBAGIAN DATA LATIH DAN DATA UJI
+===========================================================================
+Jumlah seluruh data : 198
+Jumlah data latih    : 158
+Jumlah data uji      : 40
+
+Distribusi data latih:
+label
+Sport      79
+Finance    79
+Name: count, dtype: int64
+
+Distribusi data uji:
+label
+Finance    20
+Sport      20
+Name: count, dtype: int64
+
+Contoh data latih:
+ id   label
+ 39   sport
+ 91   sport
+178 finance
+ 32   sport
+  2   sport
+
+===========================================================================
+TAHAP 3: PELATIHAN WORD2VEC SKIP-GRAM
+===========================================================================
+Pelatihan Word2Vec selesai.
+Metode             : Skip-gram
+Vector size        : 100
+Window              : 5
+Minimum count       : 1
+Epochs              : 20
+Jumlah kata unik    : 4416
+
+Contoh kosakata:
+['dan', 'yang', 'di', 'ini', 'untuk', 'dengan', 'dari', 'dalam', 'jadi', 'indonesia', 'pada', 'sebut', 'itu', 'juga', 'laku', 'ada', 'pasar', 'serta', 'balap', 'usaha']
+
+Model Word2Vec disimpan.
+
+===========================================================================
+TAHAP 4: ANALISIS VEKTOR KATA
+===========================================================================
+
+Kata target: saham
+Dimensi vektor: 100
+Vektor kata:
+[ 0.04668595  0.05728834 -0.6165915   0.1513645  -0.08161372  0.6861765
+ -0.46946275  1.0198605  -0.8905655  -0.4895906  -0.34789625  0.05844148
+  0.39975598 -0.33908537 -0.4374031  -0.4740433  -0.3104465   0.03141099
+ -1.0488063  -1.1762099   0.13359682 -0.6907145  -0.11750276  0.18863691
+  0.49259922 -0.35272428  0.32508928  0.8699301  -0.14729002  0.00325431
+ -0.3633901  -0.19711229 -0.05291343 -0.2738407   0.10862587  0.75196266
+ -0.9227987  -0.19978516 -0.17050949  0.45912924 -0.41887686 -0.68875533
+  0.97490245 -0.7422155  -0.07067765  0.52197033 -0.11636294 -0.38158187
+  0.16030678 -0.1167834  -0.39081603 -0.6771306  -0.31219622 -0.30743667
+ -0.682744   -0.6085168   0.34161243  0.3148079  -0.62735325  0.5098791
+ -0.43349546  0.16201788 -0.20047073  0.10164654  0.12572196 -0.33783603
+  0.18893395 -0.10993484 -0.81465155  0.366455   -0.33086652 -0.5858893
+ -0.7013892  -0.22395208 -0.34378463  0.1348703  -0.3790301   0.06226436
+ -0.16884698  0.08984517  0.6274901  -0.5155316  -0.17307201  0.4462259
+ -0.1640536   0.39745772  0.17459163 -0.68353426  0.44653952 -0.3353678
+ -0.45719576  0.39357105 -0.31892383 -0.3188034   0.51929194  0.05466735
+ -0.13721874  0.38721567 -0.83298314  0.61214876]
+
+Lima nilai pertama:
+[ 0.04668595  0.05728834 -0.6165915   0.1513645  -0.08161372]
+
+Kata paling mirip:
+        kata  skor_kemiripan
+   deutscher        0.726285
+       index        0.724391
+     kapital        0.721167
+      aktien        0.717687
+      ambruk        0.717534
+        edar        0.712026
+ konsentrasi        0.709875
+granularitas        0.706495
+     stagnan        0.703240
+    stockbit        0.702709
+</pre></div>
+</div>
+<img alt="_images/8b1ede76961939242c8e9752f2e97975220b08c536017fa7060a2b619cd8b610.png" src="_images/8b1ede76961939242c8e9752f2e97975220b08c536017fa7060a2b619cd8b610.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil analisis vektor kata disimpan.
+
+===========================================================================
+TAHAP 5: MEMBENTUK VEKTOR DOKUMEN
+===========================================================================
+Bentuk X_train_vec: (158, 100)
+Bentuk X_test_vec : (40, 100)
+Vektor nol data latih: 0
+Vektor nol data uji  : 0
+
+Contoh lima dimensi pertama dari tiga dokumen latih:
+[[-0.06050626  0.02396429 -0.11456133  0.0991246  -0.03907755]
+ [-0.02499629  0.13800843 -0.21535544  0.13401143 -0.13507538]
+ [ 0.02892541  0.05683252 -0.08235133  0.17337804 -0.16902435]]
+
+Vektor dokumen berhasil disimpan.
+
+===========================================================================
+TAHAP 6: KLASIFIKASI GAUSSIAN NAIVE BAYES
+===========================================================================
+Model berhasil dilatih.
+Representasi teks : Word2Vec Skip-gram
+Algoritma         : Gaussian Naive Bayes
+PCA               : Tidak digunakan
+Jumlah fitur      : 100
+
+Jumlah data latih per kelas:
+  Kelas  Jumlah
+Finance      79
+  Sport      79
+
+Model GaussianNB disimpan.
+
+===========================================================================
+TAHAP 7: EVALUASI WORD2VEC SKIP-GRAM + GAUSSIANNB
+===========================================================================
+
+A. METRIK EVALUASI KESELURUHAN
+---------------------------------------------------------------------------
+Model: Word2Vec Skip-gram + GaussianNB
+Accuracy: 0.9500 (95.00%)
+Balanced Accuracy: 0.9500 (95.00%)
+Precision Macro: 0.9545 (95.45%)
+Recall Macro: 0.9500 (95.00%)
+F1 Macro: 0.9499 (94.99%)
+Precision Weighted: 0.9545 (95.45%)
+Recall Weighted: 0.9500 (95.00%)
+F1 Weighted: 0.9499 (94.99%)
+
+B. CLASSIFICATION REPORT
+---------------------------------------------------------------------------
+              precision  recall  f1-score  support
+Finance          0.9091    1.00    0.9524    20.00
+Sport            1.0000    0.90    0.9474    20.00
+accuracy         0.9500    0.95    0.9500     0.95
+macro avg        0.9545    0.95    0.9499    40.00
+weighted avg     0.9545    0.95    0.9499    40.00
+</pre></div>
+</div>
+<img alt="_images/103c2419f67a493b04f15163ab426b1fab8c4da8d47ed23ad65f6e8a6faf910c.png" src="_images/103c2419f67a493b04f15163ab426b1fab8c4da8d47ed23ad65f6e8a6faf910c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===========================================================================
+TAHAP 8: CONFUSION MATRIX
+===========================================================================
+Urutan kelas: Finance, Sport
+
+Confusion matrix:
+[[20  0]
+ [ 2 18]]
+</pre></div>
+</div>
+<img alt="_images/7a2f9e1c475bce738b88642f50bb317a2e507b074d122a363eb1a69e7829aca6.png" src="_images/7a2f9e1c475bce738b88642f50bb317a2e507b074d122a363eb1a69e7829aca6.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===========================================================================
+TAHAP 9: HASIL PREDIKSI DATA UJI
+===========================================================================
+
+Sepuluh contoh hasil prediksi:
+ id                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  isi_berita_clean   label  label_aktual_id  label_prediksi_id label_aktual label_prediksi hasil
+138 menteri koordinator bidang ekonomi ri airlangga hartarto temu deputi pertama perdana menteri rusia den manturov di bogor jumat temu ini bahas luas mitra antarpelaku usaha tingkat kapasitas industri nasional hingga jaja kolaborasi di sektor kapal dan dirgantara temu ini rupa tindak lanjut dari temu presiden ri prabowo subianto dan presiden rusia vladimir putin di vladivostok rusia pada september serta hasil sidang komisi sama skb ke ri rusia di kazan rusia pada mei jalan dengan arah presiden prabowo subianto airlangga dorong kuat kerja sama ekonomi dan industri dua negara lalu tingkat mitra antarpelaku usaha luas peluang investasi serta jaja kerja sama teknologi dan kembang kapasitas industri dua pihak juga bahas bagai langkah untuk kuat kerja sama di sektor strategis khusus industri kapal dan terbang guna dorong peluang kolaborasi industri antara dua negara tahu hubung dagang indonesia dan rusia terus tunjuk kembang positif pada total dagang dua negara capai usd miliar tingkat sekitar banding yang catat besar usd miliar komoditas seperti minyak kelapa sawit kopi kakao produk tani dan pupuk jadi bagi penting dalam hubung dagang dua negara airlangga sambut baik hadir delegasi bisnis rusia pada trade expo indonesia tei bagai momentum untuk kuat hubung antarpelaku usaha dan buka peluang mitra komersial baru temu bisnis yang selenggara lama tei harap dapat dorong diversifikasi dagang serta luas kerja sama investasi dan industri indonesia dan rusia milik potensi besar untuk terus kuat kerja sama ekonomi yang saling untung kami komitmen untuk dorong tingkat dagang dan investasi luas mitra antarpelaku usaha serta pasti bagai peluang kerja sama dapat ditindaklanjuti jadi langkah langkah konkret yang beri manfaat bagi dua negara ujar dalam terang tulis sabtu nada dengan hal sebut dpm manturov tekan penting kuat hubung antarpelaku usaha bagai faktor utama dalam luas kerja sama dagang dan ekonomi dua negara bangun kontak bisnis rupa faktor kunci dalam luas hubung dagang dan ekonomi bagai tindak lanjut atas partisipasi indonesia bagai negara mitra dalam pamer innoprom di yekaterinburg pada bulan juli lalu maka delegasi bisnis rusia hadir tei pekan ini usaha usaha kami hadir temu business to business bb dengan mitra potensial indonesia serta forum bisnis dengan sesi tematik kena dagang investasi dan kerja sama industri ujar dpm manturov lebih lanjut dua pihak juga bahas kembang indonesia eurasian economic union free trade agreement i eaeu fta janji ini harap dapat buka akses pasar yang lebih luas bagi produk unggul indonesia seperti minyak kelapa sawit kopi kakao tekstil dan furnitur serta kuat hubung dagang dengan negara negara anggota eaeu saat ini proses ratifikasi janji sebut telah dekat tahap selesai dua pihak harap seluruh prosedur yang perlu dapat selesai belum akhir sehingga janji dapat segera laku efektif entry into force eif dan beri manfaat nyata bagi laku usaha dua negara pada akhir temu airlangga dan dpm manturov sepakat untuk terus kuat kerja sama di bagai sektor strategis antara lain tani teknologi industri serta kembang rantai pasok kolaborasi sebut harap dapat terus kembang cara lanjut dan beri manfaat nyata bagi ekonomi dua negara bagai informasi turut hadir damping pada temu ini yakni deputi bidang koordinasi kerja sama ekonomi dan investasi kemenko ekonomi edi prio pambudi serta deputi bidang koordinasi kelola dan kembang usaha badan usaha milik negara kemenko ekonomi ferry irawan akd ega finance                0                  0      Finance        Finance Benar
+ 41                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           babak besar denmark open akan saji duel sama wakil indonesia antara jonatan christie dan alwi farhan ini tanggap dua untuk laga esok baik alwi dan jonatan sama sama lolos ke babak dua usai tumbang lawan masing masing di partai besar yang gulir rabu alwi kalah vs ayush shetty india dalam laga tiga gim sementara jonatan takluk lin chun yi taiwan dua gim langsung dasar drawing tunggal putra dua pun pasti jumpa di babak besar laga ini akan jadi temu tiga bagi dua tanding akan langsung kamis besok di babak besar temu alwi dan akan jadi temu tiga kami saya akan nikmat tanding ini kata jonatan dalam terang lalu federasi saya pasti senang dengan improvement alwi yang sangat baik tahun ini sama dia dan ubed sering latih bareng saya sering ke pelatnas juga jadi sparring ujar sementara itu alwi kata bakal fokus pada kesiap diri meski tak tampik rasa senang karena bisa lawan rekan sendiri lebih baik temu senior sendiri karena me represantikan indonesia tapi siapa lawan saya ingin siap diri saya dulu fokus ke diri sendiri saja kata alwi mcy ran   sport                1                  1        Sport          Sport Benar
+ 96                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        jorge martin aku ada masalah tekan ban di sprint race motogp mandalika martin harus rela gagal podium yang penting nggak celaka pertamina grand prix of indonesia gelar sesi sprint race pada sabtu di sirkuit mandalika lombok ntb balap saji dalam putar marc marquez keluar bagai juara ai ogura dan fabio diginantonio lengkap podium dua dan tiga jorge martin mula bisa pimpin balap di lima lap akhir martin alami masalah ban dan harus lambat laju posisi pertama salip marc marquez dua putar akhir rider aprilia itu harus kembali lorot posisi dua strip karena lebar di tikung ke lalu salip ogura dan diginantonio diri finis empat jorge martin aku ada masalah pada tekan ban depan itu yang buat diri sedikit tengok ke belakang belum salip marc marquez ya saya ada masalah dengan tekan ban kata kepada tnt sports makanya saya harus biar marc lewat saya sedih sih tambah saya benar sudah pimpin dan jaga jarak dengan baik tapi yang penting saya bisa selesai balap tidak diskualifikasi dan tidak celaka tutup posisi jorge martin di klasemen motogp sementara turut kudeta marc marquez marquez sementara punya poin martin punya poin aff cas   sport                1                  1        Sport          Sport Benar
+ 97                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     marc marquez tang sprint race motogp mandalika the baby alien sungguh sungguh jadi raja sprint race pertamina grand prix of indonesia gelar sesi sprint race pada sabtu di sirkuit mandalika lombok ntb balap saji dalam putar marc marquez keluar bagai juara ai ogura dan fabio diginantonio lengkap podium dua dan tiga lansir dari situs resmi motogp marc marquez terus kukuh diri jadi raja sprint race rider ducati itu telah tang sprint race di sirkuit beda itu jadi rekor yang unggul jorge martin dengan menang marquez tampak makin sulit kejar marc marquez turut sudah tang sprint race untuk ke kali dan jadi rider banyak yang menang unggul jorge martin dengan menang untuk tahu sprint race baru gelar sejak motogp musim dan jumlah putar adalah tengah dari jumlah putar dari balap utama marquez pun sudah cicip podium di sirkuit mandalika telah di empat seri belum gagal balap dan tiga kali dnf akan marquez bisa lengkap buka puasa dengan tang seri balap utama pada minggu besok siang aff cas   sport                1                  1        Sport          Sport Benar
+124                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             laku usaha mikro kecil dan tengah umkm perlu waspada bagai modus tipu digital modus sebut antara lain bukti transfer palsu taut yang mengatasnamakan sedia layan uang hingga minta kode one time password otp yang risiko rugi usaha jika tidak nali sejak awal modus tipu itu tidak hanya dapat ganggu transaksi tetapi juga potensi pengaruh uang usaha dan keluarga pt jalin bayar nusantara jalin bagi dari danantara indonesia gagas gera ibu cek dulu untuk kuat literasi aman transaksi digital khusus bagi perempuan laku umkm vp corporate secretary jalin putu agnia kata aman transaksi digital perlu jalan iring dengan kembang infrastruktur bayar program ini juga laku untuk imbang antara lesat teknologi bayar dengan literasi uang bagai selenggara infrastruktur sistem bayar nasional jalin ingin pasti maju teknologi bayar imbang dengan tingkat literasi aman digital bagi perempuan laku umkm mampu ini penting untuk lindung transaksi langsung usaha dan uang keluarga ujar putu dalam terang tulis sabtu program ini mulai lalu edukasi kepada perempuan di lurah susu ciracas jakarta timur pada jumat giat sebut kerja sama dengan t care dan libat perempuan laku umkm ibu rumah tangga yang jalan usaha kader daya dan sejahtera keluarga pkk serta anggota komunitas perempuan lalu program sebut serta bekal terampil untuk nali transaksi curiga lindung data pribadi serta tentu langkah yang tepat ketika hadap duga tipu edukasi beri lalu digital safety academy yang guna simulasi kasus hari hari masuk cara aman akun dan manfaat kanal adu resmi upaya edukasi ini laku di tengah senjang antara akses dan paham masyarakat hadap layan uang dasar survei nasional literasi dan inklusi uang snlik indeks inklusi uang indonesia capai sedang indeks literasi uang ada di level arti dapat selisih poin persentase antara tingkat inklusi dan literasi uang kondisi ini tunjuk bahwa akses masyarakat hadap layan uang masih perlu imbang dengan tingkat tahu dan terampil dalam guna cara aman sementara itu bank indonesia bi catat volume transaksi bayar digital capai miliar transaksi pada agustus tumbuh cara tahun besar aktivitas transaksi digital buat paham kena aman bayar makin relevan bagi masyarakat masuk laku usaha yang andal transaksi digital dalam giat hari hari untuk luas jangkau edukasi jalin bentuk lebih dari duta aman digital lalu program digital safety ambassador activation para duta akan dapat perangkat edukasi digital safety toolkit dan damping dengan target masing masing edukasi tidak lima orang dengan skema sebut program ini target jangkau terima manfaat tambah di luar serta awal ke depan jalin harap gera ibu cek dulu dapat jangkau lebih banyak komunitas perempuan laku umkm di bagai wilayah indonesia lalu kolaborasi dengan mitra lokal ada ara finance                0                  0      Finance        Finance Benar
+  5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     atlet panah indonesia nurisa dian ashrifah dapat apresiasi besar telah cetak sejarah dengan raih medali emas nomor women s individual pada asi games di jepang nurisa terima bonus uang tunai rp miliar dan buah mobil listrik bonus rp miliar beri oleh ketua satu panah indonesia pan arsjad rasjid sementara itu mobil listrik serah oleh manajer tim panah indonesia azis armand beri bonus sebut laku dalam acara tajuk syukur medali emas panah indonesia di beranda kitchen jakarta selatan jumat malam wib acara itu turut hadir ketua noc indonesia raja sapta oktohari serta ketua akuatik indonesia anindya bakrie prestasi nurisa yang akrab sapa hani jadi catat sejarah bagi panah indonesia medali emas sebut rupa emas pertama yang hasil raih atlet panah indonesia panjang keikutsertaan di asi games arsjad rasjid ungkap rasa syukur sekaligus bangga atas capai sebut turut hasil hani tidak lepas dari kerja keras atlet dukung tim serta doa bagai pihak hari ini adalah hari yang kita syukur kita syukur karena indonesia tidak pernah tang emas di asi games dan ini adalah pertama kali untuk panah indonesia ujar arsjad ia juga sorot hasil tim panah indonesia lewat saing korea selatan yang kenal bagai salah satu kuat utama dunia dalam cabang olahraga sebut bagi arsjad capai ini jadi modal penting untuk hadap target ikut yakni olimpiade di los angeles amerika serikat ia harap hasil hani dapat jadi motivasi bagi atlet dan latih panah indonesia untuk terus tingkat prestasi di tingkat internasional ini adalah ukir sejarah selain kerja keras atlet tetapi juga perlu dukung dan doa harap insyaallah kita bisa dapat medali yang lebih baik lagi nanti di olimpiade kata sementara itu hani aku syukur atas apresiasi yang beri telah hasil sembah emas untuk indonesia atlet usia tahun sebut sampai terima kasih kepada arsjad rasjid azis armand dan iman atas dukung yang terima hani juga aku tidak sangka bisa langsung raih medali emas pada tampil perdana di asi games pertama terima kasih banyak untuk pak arsjad rasjid pak azis dan pak iman yang telah beri apresiasi yang sangat kesan bagi saya tutur hani hasil di asi games makin mantap tekad hani untuk kejar sempat tampil di olimpiade ia aku telah lama simpan impi untuk laga di ajang olahraga besar di dunia sebut iya ingin sekali karena memang dari dulu saya ingin moga bisa ikut olimpiade ujar hani pun harap suatu saat dapat sembah medali olimpiade bagi indonesia bagi capai sebut akan jadi hadiah yang sangat istimewa dalam jalan karier bagai atlet panah jika saya bisa sempat untuk menang medali olimpiade itu suatu hadiah yang spesial buat saya ungkap ran aff   sport                1                  1        Sport          Sport Benar
+130                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        dua kapal angkut bbm bawa total juta liter pertalite ke bal pada jumat pertamina patra niaga target stok pertalite di bal capai juta liter pada sabtu dua kapal sebut adalah mt pangkal brandan yang sandar di integrated terminal it manggis dengan bawa juta liter pertalite dan mt asi rigel yang sandar di fuel terminal ft sanggar dengan muat juta liter pertalite area manager communication relations csr pt pertamina patra niaga regional jatimbalinus ahad rahedi kata rata rata konsumsi pertalite di bal capai juta liter per hari pasok sebut penuh lalu it manggis dan ft sanggar dalam tiga hari akhir yakni oktober salur pertalite ke spbu capai rata rata juta liter per hari jumlah itu lebih tinggi dari konsumsi hari untuk penuh minta yang belum belum layan akibat stok di spbu habis rata rata konsumsi hari pertalite di bal capai sekitar juta liter yang penuh lalu it manggis dan ft sanggar sementara itu dalam tiga hari akhir yakni oktober rata rata salur pertalite ke spbu telah capai sekitar juta liter per hari salur di atas rata rata konsumsi hari ini laku untuk bantu penuh minta masyarakat yang belum belum layan ketika stok di spbu habis jelas ahad pertamina target stok pertalite di bal capai juta liter pada oktober jumlah sebut kira tara dengan butuh sekitar dua minggu dalam kondisi pasok aman untuk dukung salur bbm banyak spbu siap operasi lama jam rinciannya spbu ada di kota denpasar dan spbu di kabupaten badung pertamina juga operasi it manggis dan ft sanggar lama jam banyak mobil tangki dan awak mobil tangki siaga untuk salur bbm bagi mobil tangki juga alih dari banyuwangi ke bal pertamina koordinasi dengan kodam ix udayana untuk dukung butuh personel operasional dan siap kemudi cadang dengan tetap perhati selamat kerja selain itu pertamina patra niaga dan perintah provinsi bal pakat batas isi bbm maksimal liter untuk kendara roda empat dan liter untuk kendara roda dua atur sebut telah dapat tuju gubernur bal kami terus evaluasi kondisi di lapang dan koordinasi dengan para mang penting agar langkah yang laku sesuai dengan butuh masyarakat kami mohon maaf atas ketidaknyamanan yang jadi serta terima kasih atas erti dan dukung masyarakat tutup ahad fdl fdl finance                0                  0      Finance        Finance Benar
+ 82                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           jakarta marco bezzecchi tambah catat menang di kelas premier motogp telah juara pertamina grand prix of indonesia di sirkuit mandalika minggu balap aprilia itu kini koleksi menang di kelas tinggi balap motor grand prix menang di mandalika jadi yang ke bagi bezzecchi di kelas premier ini jadi podium atas yang lima bagi di motogp dalam daftar sebut valentino rossi masih tempat posisi atas dengan menang legenda italia itu raih menang pertama pada dan yang akhir di motogp belanda scroll to continue with content marc marquez ada di posisi dua dengan menang balap spanyol itu catat menang akhir dalam daftar sebut di motogp jepang di bawah rossi dan marquez ada giacomo agostini dengan menang mick doohan dengan menang serta jorge lorenzo yang koleksi menang bezzecchi kini sejajar dengan fabio quartararo yang juga milik menang kelas premier dua masih jauh dari catat para legenda di papan atas tetapi tambah menang di mandalika kuat posisi bezzecchi dalam daftar sebut daftar menang motogp panjang sejarah krs ran   sport                1                  1        Sport          Sport Benar
+ 62                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ajang balap gengsi pertamina grand prix of indonesia sukses gelar di pertamina mandalika international circuit lombok nusa tenggara barat pada oktober hasil ini tak lepas dari kuat kolaborasi bagai pihak direktur utama pt pertamina persero simon aloysius mantiri sampai apresiasi dalam kepada seluruh mang penting mulai dari perintah pusat dan daerah selenggara balap hingga aparat aman di balik gelar ini ada dedikasi marshal tenaga medis tugas aman dan bersih rawan kerja serta laku umkm ujar simon dalam terang tulis senin simon juga sampai rasa terima kasih kepada masyarakat indonesia khusus warga lombok sambut hangat dan ramah mereka nilai sangat dukung lancar ajang balap internasional sebut turut sukses pertamina grand prix of indonesia kuat posisi indonesia bagai tuan rumah ajang olahraga kelas dunia hal ini sekaligus mantap kawasan mandalika bagai destinasi sport tourism unggul temu antara ajang olahraga pariwisata budaya dan giat usaha ini turut buka peluang ekonomi yang besar masyarakat bisa ikut ambil bagi cara langsung dalam rantai selenggara acara bagai usaha energi nasional pertamina hadir untuk bawa nama bangsa ke panggung internasional kami ingin momentum ini beri nilai tambah bagi usaha lokal serta kembang talenta nasional tegas simon lebih lanjut dukung pertamina pada ajang balap ini rupa bagi dari kuat ekosistem pertamina group ekosistem ini hubung sektor energi mobilitas pariwisata dengan daya ekonomi warga di sekitar sinergi layan energi terbang dan akomodasi yang hadir pertamina nilai sangat bantu konektivitas langkah strategis ini jalan dengan komitmen usaha dalam dukung pusat pusat tumbuh ekonomi di tanah air di kancah global ajang ini juga jadi sarana yang efektif untuk kenal produk produk nasional misal mitra pertamina enduro dengan vr racing team serta guna bahan bakar pertamax turbo pada mobil selamat safety car libat aktif di ekosistem motorsport dunia ini milik nilai yang sangat strategis utama dalam bangun percaya global hadap merek brand pertamina dan luas peluang kembang pasar ke depan simon harap kembang ekosistem ini bisa terus jalan sambung selain dukung umkm momentum ini harap dapat buka ruang inspirasi bagi lahir balap balap muda di indonesia harap kami semangat kolaborasi ini terus jaga mandalika dapat terus kembang bagai destinasi sport tourism yang jadi ruang bagi talenta indonesia untuk tumbuh dan maju sama pungkas anl ega   sport                1                  0        Sport        Finance Salah
+187                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    menteri koordinator bidang hilir dan transisi sekaligus menteri esdm bahlil lahadalia minta pertamina untuk ganda kapal angkut bahan bakar minyak bbm ke bal hal ini guna kurang antre kendara yang kini sedang jadi di bal pasal kata bahlil dasar lapor dari pertamina antre bbm di bal jadi karena ada kendala pada distribusi yakni ada kendala kirim bbm dari kapal yang pertamina lapor ke saya tadi adalah distribusi dari daerah jawa timur ke bal dan beberapa tempat yang kait dengan kapal saya tadi perintah untuk mereka untuk segera ganda kapal agar tidak jadi kondisi yang tidak ingin di daerah daerah supaya bisa cepat ujar bahlil di kantor menteri esdm jakarta jumat bahlil pun tegas bahwa stok bbm nasional dalam kondisi aman di mana bbm nasional ada di level hari jadi stok bbm nasional insyaallah itu aman terang kait kondisi stok bbm nasional yang biasa ada di level hari akan tetapi kini stok ada di level bahlil turun stok jadi hari utama jadi pada bensin ron sementara itu stok bensin ron ron ron serta solar sebut tidak alami masalah yang jadi geser dari ke hari itu adalah ron kenapa itu jadi karena jadi shifting yang tadi orang pake dan itu di shifting ke karena harga kan cukup beda cukup ekonomis itu itu benar masalah kata ia tegas bahwa dalam minggu ke depan stok bbm nasional akan ada di level hari tapi cara standar nasional clear mungkin untuk capai di angka itu ya kita butuh waktu minggu minggu selesai terang hrp fdl finance                0                  0      Finance        Finance Benar
+
+Ringkasan hasil prediksi:
+hasil
+Benar    38
+Salah     2
+Name: count, dtype: int64
+
+===========================================================================
+TAHAP 10: SIMPAN MODEL DAN METADATA
+===========================================================================
+Model dan metadata berhasil disimpan.
+
+===========================================================================
+TAHAP 11: PREDIKSI BERITA BARU
+===========================================================================
+
+Teks: IHSG bergerak menguat seiring peningkatan volume transaksi saham di pasar modal
+Prediksi: Finance
+Probabilitas Finance: 1.0000
+Probabilitas Sport: 0.0000
+
+===========================================================================
+TAHAP 12: RINGKASAN OUTPUT
+===========================================================================
+classification_report.csv (0.28 KB)
+confusion_matrix_skipgram.png (81.70 KB)
+data_latih.csv (799.27 KB)
+data_uji.csv (198.77 KB)
+dataset_model.csv (998.00 KB)
+gnb_model.pkl (3.91 KB)
+grafik_evaluasi_skipgram.png (128.15 KB)
+hasil_evaluasi.csv (0.24 KB)
+hasil_kemiripan_kata_skipgram.csv (0.30 KB)
+hasil_prediksi_berita_baru.csv (0.21 KB)
+hasil_prediksi_data_uji.csv (81.27 KB)
+hasil_vektor_kata_skipgram.csv (2.19 KB)
+metadata_model.pkl (0.23 KB)
+vektor_dokumen_latih.csv (182.68 KB)
+vektor_dokumen_uji.csv (47.04 KB)
+visualisasi_kemiripan_kata.png (83.80 KB)
+w2v_model.model (3582.39 KB)
+
+Lokasi hasil: D:\webmining\hasil_skipgram
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="modelling-w2v.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Modelling</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yunika Lestari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

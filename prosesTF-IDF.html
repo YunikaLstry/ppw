@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Load Data Hasil Preprocessing &#8212; Web Mining</title>
+    <title>Proses TF-IDF &#8212; Web Mining</title>
   
   
   
@@ -65,8 +65,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'prosesTF-IDF';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Pemisahan Fitur (\(X\)) dan Label (\(y\))" href="PCA.html" />
-    <link rel="prev" title="Catatan" href="catatan.html" />
+    <link rel="next" title="Tahapan PCA" href="PCA.html" />
+    <link rel="prev" title="Preprocessing data" href="preprocessing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,18 +174,16 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="catatan.html">Catatan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="crawling.html">Crawling data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catatan.html">Catatan</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Load Data Hasil Preprocessing</a></li>
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="PCA.html">Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)</a></li>
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Proses TF-IDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCA.html">Tahapan PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dasar-skipgram.html">Dasar Skipgram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="skipgram_tanpa_pca.html">Skip-gram Tanpa PCA (Word Embedding)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelling.html">Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clasifikasi_skipgram.html">Skip-gram (Word Embedding)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelling-w2v.html">Modelling</a></li>
 
 
 </ul>
@@ -341,7 +339,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Load Data Hasil Preprocessing</h1>
+    <h1>Proses TF-IDF</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -351,14 +349,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Load Data Hasil Preprocessing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-fitting-tfidfvectorizer">Inisialisasi &amp; Fitting TfidfVectorizer</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-vocabulary-daftar-kata-unik">Ekstraksi Vocabulary (Daftar Kata Unik)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pembentukan-dataframe-matriks-tf-idf">Pembentukan DataFrame Matriks TF-IDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bobot-kata-kunci-tertinggi-per-kategori">Analisis Bobot Kata Kunci Tertinggi Per Kategori</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-matriks-tf-idf-ke-csv">Simpan Matriks TF-IDF ke CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data-hasil-preprocessing">Load Data Hasil Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-fitting-tfidfvectorizer">Inisialisasi &amp; Fitting TfidfVectorizer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-vocabulary-daftar-kata-unik">Ekstraksi Vocabulary (Daftar Kata Unik)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembentukan-dataframe-matriks-tf-idf">Pembentukan DataFrame Matriks TF-IDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bobot-kata-kunci-tertinggi-per-kategori">Analisis Bobot Kata Kunci Tertinggi Per Kategori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-matriks-tf-idf-ke-csv">Simpan Matriks TF-IDF ke CSV</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -369,8 +366,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="load-data-hasil-preprocessing">
-<h1>Load Data Hasil Preprocessing<a class="headerlink" href="#load-data-hasil-preprocessing" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="proses-tf-idf">
+<h1>Proses TF-IDF<a class="headerlink" href="#proses-tf-idf" title="Permalink to this heading">#</a></h1>
+<section id="load-data-hasil-preprocessing">
+<h2>Load Data Hasil Preprocessing<a class="headerlink" href="#load-data-hasil-preprocessing" title="Permalink to this heading">#</a></h2>
 <p>Memastikan dataset hasil preprocessing (isi_berita_clean) sudah siap digunakan.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -382,18 +381,36 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load dataset hasil preprocessing jika belum ada di memory</span>
-<span class="k">if</span> <span class="s1">'df'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'detik_preprocessed.csv'</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="c1"># Tampilkan baris untuk verifikasi</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=== VERIFIKASI DATA SIAP TF-IDF ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Direktori kerja:"</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Folder Data tersedia:"</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">'Data'</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"File CSV tersedia:"</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">'Data/detik_preprocessed.csv'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Direktori kerja: d:\webmining
+Folder Data tersedia: True
+File CSV tersedia: True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sesuaikan nama kolom jika dataset menggunakan isi_berita</span>
+<span class="k">if</span> <span class="s1">'isi_berita_clean'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">'isi_berita'</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'isi_berita'</span><span class="p">:</span> <span class="s1">'isi_berita_clean'</span><span class="p">})</span>
+
+<span class="c1"># Verifikasi data siap TF-IDF</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Verifikasi Data Siap TF-IDF ---"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'isi_berita_clean'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== VERIFIKASI DATA SIAP TF-IDF ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Verifikasi Data Siap TF-IDF ---
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -423,31 +440,31 @@ document.write(`
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>ketua umum komite olahraga nasional indonesia ...</td>
+      <td>Indonesia mencatatkan sejarah di dunia senam. ...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>urus pusat kickboxing indonesia pp kbi periode...</td>
+      <td>Sean Gelael dan Team WRT 32 punya kans naik po...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>lina hisage atlet tolak peluru asal wamena pap...</td>
+      <td>Tiga pebalap Team WRT 32 bakal bagi tugas akhi...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>timnas equestrian indonesia tolak jepang jelan...</td>
+      <td>Tim basket Hangtuah memanfaatkan turnamen pram...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>dua seri akhir motogp marc marquez sukses sapu...</td>
+      <td>Atlet panahan Indonesia, Nurisa Dian Ashrifah,...</td>
       <td>sport</td>
     </tr>
     <tr>
@@ -457,43 +474,43 @@ document.write(`
       <td>...</td>
     </tr>
     <tr>
+      <th>194</th>
+      <td>195</td>
+      <td>Penyedia indeks saham global, Morgan Stanley C...</td>
+      <td>finance</td>
+    </tr>
+    <tr>
       <th>195</th>
       <td>196</td>
-      <td>purbaya yudhi sadewa laku proses serah terima ...</td>
+      <td>Bank Indonesia buka suara soal penguatan nilai...</td>
       <td>finance</td>
     </tr>
     <tr>
       <th>196</th>
       <td>197</td>
-      <td>pt bayan resources tbk byan umum ada kahar ali...</td>
+      <td>Penyedia indeks saham global, MSCI, membuka po...</td>
       <td>finance</td>
     </tr>
     <tr>
       <th>197</th>
       <td>198</td>
-      <td>bp bumn danantara dorong selesai soal lrt city...</td>
+      <td>PT Bank Pembangunan Daerah Bali (Bank BPD Bali...</td>
       <td>finance</td>
     </tr>
     <tr>
       <th>198</th>
       <td>199</td>
-      <td>direktur jenderal pajak djp bimo wijayanto pas...</td>
-      <td>finance</td>
-    </tr>
-    <tr>
-      <th>199</th>
-      <td>200</td>
-      <td>pertamina new renewable energy pertamina nre r...</td>
+      <td>PT Pegadaian (Persero) meraih dua penghargaan ...</td>
       <td>finance</td>
     </tr>
   </tbody>
 </table>
-<p>200 rows × 3 columns</p>
+<p>199 rows × 3 columns</p>
 </div></div></div>
 </div>
 </section>
 <section id="inisialisasi-fitting-tfidfvectorizer">
-<h1>Inisialisasi &amp; Fitting TfidfVectorizer<a class="headerlink" href="#inisialisasi-fitting-tfidfvectorizer" title="Permalink to this heading">#</a></h1>
+<h2>Inisialisasi &amp; Fitting TfidfVectorizer<a class="headerlink" href="#inisialisasi-fitting-tfidfvectorizer" title="Permalink to this heading">#</a></h2>
 <p>Mengubah teks berita (isi_berita_clean) menjadi matriks angka berbobot TF-IDF menggunakan scikit-learn.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -504,7 +521,7 @@ document.write(`
 <span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
 <span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'isi_berita_clean'</span><span class="p">])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=== HASIL ENCODING LABEL &amp; FIT TF-IDF ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Hasil Encoding LABEL &amp; FIT TF-IDF ---"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"• Distribusi Label Numerical:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'label_encoded'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">• Dimensi Matriks TF-IDF : </span><span class="si">{</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> (Artikel x Kata Unik)"</span><span class="p">)</span>
@@ -512,70 +529,97 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== HASIL ENCODING LABEL &amp; FIT TF-IDF ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Hasil Encoding LABEL &amp; FIT TF-IDF ---
 • Distribusi Label Numerical:
 label_encoded
 1    100
-0    100
+0     99
 
-• Dimensi Matriks TF-IDF : (200, 5307) (Artikel x Kata Unik)
+• Dimensi Matriks TF-IDF : (199, 7409) (Artikel x Kata Unik)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="ekstraksi-vocabulary-daftar-kata-unik">
-<h1>Ekstraksi Vocabulary (Daftar Kata Unik)<a class="headerlink" href="#ekstraksi-vocabulary-daftar-kata-unik" title="Permalink to this heading">#</a></h1>
+<h2>Ekstraksi Vocabulary (Daftar Kata Unik)<a class="headerlink" href="#ekstraksi-vocabulary-daftar-kata-unik" title="Permalink to this heading">#</a></h2>
 <p>Mengambil semua kata unik (features) yang berhasil diekstrak oleh vectorizer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ambil daftar seluruh nama fitur (kata unik)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="c1"># Pastikan teks berasal dari kolom hasil preprocessing</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'isi_berita_clean'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span>
+    <span class="n">token_pattern</span><span class="o">=</span><span class="sa">r</span><span class="s1">'(?u)\b[a-zA-Z]{2,}\b'</span><span class="p">,</span>
+    <span class="n">lowercase</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">X_tfidf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+
+<span class="c1"># Ambil seluruh nama fitur</span>
 <span class="n">feature_names</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=== HASIL EKSTRAKSI VOCABULARY ==="</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"• Total Kata Unik    : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span><span class="si">}</span><span class="s2"> kata/fitur</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Hasil Ekstraksi Vocabulary ---"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total kata unik: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span><span class="si">}</span><span class="s2"> kata/fitur</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"📌 Sampel 15 Kata Unik Pertama:"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">feature_names</span><span class="p">[:</span><span class="mi">20</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sampel 15 kata unik pertama:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">feature_names</span><span class="p">[:</span><span class="mi">15</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== HASIL EKSTRAKSI VOCABULARY ===
-• Total Kata Unik    : 5307 kata/fitur
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Hasil Ekstraksi Vocabulary ---
+Total kata unik: 7040 kata/fitur
 
-📌 Sampel 15 Kata Unik Pertama:
-['aaa', 'aau', 'ab', 'abad', 'abadi', 'abai', 'abal', 'abdullah', 'abdurrahkman', 'abet', 'abha', 'abraham', 'abrahham', 'absen', 'absorber', 'abu', 'academy', 'acara', 'accelerating', 'acceptance']
+Sampel 15 kata unik pertama:
+['aa', 'aal', 'aaron', 'ab', 'abad', 'abast', 'abdul', 'abirezky', 'abraham', 'absen', 'absennya', 'abu', 'ac', 'academy', 'acara']
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="pembentukan-dataframe-matriks-tf-idf">
-<h1>Pembentukan DataFrame Matriks TF-IDF<a class="headerlink" href="#pembentukan-dataframe-matriks-tf-idf" title="Permalink to this heading">#</a></h1>
+<h2>Pembentukan DataFrame Matriks TF-IDF<a class="headerlink" href="#pembentukan-dataframe-matriks-tf-idf" title="Permalink to this heading">#</a></h2>
 <p>Mengonversi matriks terkompresi (sparse matrix) menjadi tabel DataFrame Pandas agar bisa dibaca dengan mudah, serta menyisipkan kolom id dan label.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Ambil daftar seluruh kata unik (features)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Ambil daftar seluruh kata unik</span>
 <span class="n">feature_names</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
 
-<span class="c1"># 2. Ubah matriks TF-IDF ke DataFrame Pandas</span>
-<span class="n">df_tfidf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="c1"># 2. Bentuk ulang DataFrame matriks TF-IDF</span>
+<span class="n">df_tfidf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span>
+<span class="p">)</span>
 
-<span class="c1"># 3. Sisipkan kolom 'id' dan 'label' (1 / 0) di posisi awal</span>
-<span class="c1"># Hapus metadata jika sel dijalankan ulang agar tidak terjadi duplikasi kolom</span>
-<span class="n">df_tfidf</span> <span class="o">=</span> <span class="n">df_tfidf</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'ignore'</span><span class="p">)</span>
+<span class="c1"># 3. Pastikan metadata tidak terduplikasi</span>
+<span class="n">df_tfidf</span> <span class="o">=</span> <span class="n">df_tfidf</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">],</span>
+    <span class="n">errors</span><span class="o">=</span><span class="s1">'ignore'</span>
+<span class="p">)</span>
+
+<span class="c1"># 4. Masukkan kembali kolom ID dan label</span>
 <span class="n">df_tfidf</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">'label_encoded'</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
 <span class="n">df_tfidf</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=== TABEL MATRIKS TF-IDF (LABEL 1 &amp; 0) ==="</span><span class="p">)</span>
-<span class="c1"># Tampilkan 5 berita pertama dan 10 kata unik pertama</span>
+<span class="c1"># 5. Tampilkan hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Tabel Matriks TF-IDF (Label 1 &amp; 0) ---"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total berita : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_tfidf</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total fitur  : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Ukuran matriks TF-IDF: </span><span class="si">{</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
 <span class="n">display</span><span class="p">(</span><span class="n">df_tfidf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">12</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== TABEL MATRIKS TF-IDF (LABEL 1 &amp; 0) ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Tabel Matriks TF-IDF (Label 1 &amp; 0) ---
+Total berita : 199
+Total fitur  : 7040
+Ukuran matriks TF-IDF: (199, 7040)
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -598,16 +642,16 @@ label_encoded
       <th></th>
       <th>id</th>
       <th>label</th>
-      <th>aaa</th>
-      <th>aau</th>
+      <th>aa</th>
+      <th>aal</th>
+      <th>aaron</th>
       <th>ab</th>
       <th>abad</th>
-      <th>abadi</th>
-      <th>abai</th>
-      <th>abal</th>
-      <th>abdullah</th>
-      <th>abdurrahkman</th>
-      <th>abet</th>
+      <th>abast</th>
+      <th>abdul</th>
+      <th>abirezky</th>
+      <th>abraham</th>
+      <th>absen</th>
     </tr>
   </thead>
   <tbody>
@@ -624,7 +668,7 @@ label_encoded
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>1</th>
@@ -639,7 +683,7 @@ label_encoded
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>0.058156</td>
     </tr>
     <tr>
       <th>2</th>
@@ -654,7 +698,7 @@ label_encoded
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>3</th>
@@ -669,7 +713,7 @@ label_encoded
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>4</th>
@@ -684,7 +728,7 @@ label_encoded
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
     </tr>
   </tbody>
 </table>
@@ -692,7 +736,7 @@ label_encoded
 </div>
 </section>
 <section id="analisis-bobot-kata-kunci-tertinggi-per-kategori">
-<h1>Analisis Bobot Kata Kunci Tertinggi Per Kategori<a class="headerlink" href="#analisis-bobot-kata-kunci-tertinggi-per-kategori" title="Permalink to this heading">#</a></h1>
+<h2>Analisis Bobot Kata Kunci Tertinggi Per Kategori<a class="headerlink" href="#analisis-bobot-kata-kunci-tertinggi-per-kategori" title="Permalink to this heading">#</a></h2>
 <p>Memeriksa kata-kata yang memiliki bobot TF-IDF paling dominan pada sampel berita kategori Sport dan Finance untuk menguji relevansi fitur.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -738,7 +782,7 @@ ID Artikel: 101 | Label: 0
 </div>
 </section>
 <section id="simpan-matriks-tf-idf-ke-csv">
-<h1>Simpan Matriks TF-IDF ke CSV<a class="headerlink" href="#simpan-matriks-tf-idf-ke-csv" title="Permalink to this heading">#</a></h1>
+<h2>Simpan Matriks TF-IDF ke CSV<a class="headerlink" href="#simpan-matriks-tf-idf-ke-csv" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simpan matriks TF-IDF lengkap ke CSV</span>
@@ -756,6 +800,7 @@ ID Artikel: 101 | Label: 0
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -789,12 +834,12 @@ ID Artikel: 101 | Label: 0
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="catatan.html"
+       href="preprocessing.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Catatan</p>
+        <p class="prev-next-title">Preprocessing data</p>
       </div>
     </a>
     <a class="right-next"
@@ -802,7 +847,7 @@ ID Artikel: 101 | Label: 0
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)</p>
+        <p class="prev-next-title">Tahapan PCA</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -822,14 +867,13 @@ ID Artikel: 101 | Label: 0
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Load Data Hasil Preprocessing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-fitting-tfidfvectorizer">Inisialisasi &amp; Fitting TfidfVectorizer</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-vocabulary-daftar-kata-unik">Ekstraksi Vocabulary (Daftar Kata Unik)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pembentukan-dataframe-matriks-tf-idf">Pembentukan DataFrame Matriks TF-IDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bobot-kata-kunci-tertinggi-per-kategori">Analisis Bobot Kata Kunci Tertinggi Per Kategori</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-matriks-tf-idf-ke-csv">Simpan Matriks TF-IDF ke CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data-hasil-preprocessing">Load Data Hasil Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-fitting-tfidfvectorizer">Inisialisasi &amp; Fitting TfidfVectorizer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-vocabulary-daftar-kata-unik">Ekstraksi Vocabulary (Daftar Kata Unik)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembentukan-dataframe-matriks-tf-idf">Pembentukan DataFrame Matriks TF-IDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bobot-kata-kunci-tertinggi-per-kategori">Analisis Bobot Kata Kunci Tertinggi Per Kategori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-matriks-tf-idf-ke-csv">Simpan Matriks TF-IDF ke CSV</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

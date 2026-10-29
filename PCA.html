@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Pemisahan Fitur (\(X\)) dan Label (\(y\)) &#8212; Web Mining</title>
+    <title>Tahapan PCA &#8212; Web Mining</title>
   
   
   
@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'PCA';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Modelling" href="modelling.html" />
-    <link rel="prev" title="Load Data Hasil Preprocessing" href="prosesTF-IDF.html" />
+    <link rel="next" title="Dasar Skipgram" href="dasar-skipgram.html" />
+    <link rel="prev" title="Proses TF-IDF" href="prosesTF-IDF.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -176,23 +176,18 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="catatan.html">Catatan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="crawling.html">Crawling data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catatan.html">Catatan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prosesTF-IDF.html">Load Data Hasil Preprocessing</a></li>
-
-
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)</a></li>
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="prosesTF-IDF.html">Proses TF-IDF</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tahapan PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dasar-skipgram.html">Dasar Skipgram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="skipgram_tanpa_pca.html">Skip-gram Tanpa PCA (Word Embedding)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelling.html">Modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="skipgram.html">Contoh Skipgram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clasifikasi_skipgram.html">Skip-gram (Word Embedding)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelling-w2v.html">Modelling</a></li>
+
+
 </ul>
 
     </div>
@@ -346,7 +341,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pemisahan Fitur (X) dan Label (y)</h1>
+    <h1>Tahapan PCA</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -356,13 +351,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-explained-variance-ratio-menentukan-jumlah-komponen">Analisis Explained Variance Ratio (Menentukan Jumlah Komponen)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#aplikasi-pca-reduksi-menjadi-2-komponen-utama">Aplikasi PCA (Reduksi menjadi 2 Komponen Utama)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-scatter-plot-2d-sport-vs-finance">Visualisasi Scatter Plot 2D (Sport vs. Finance)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pembentukan-dataframe-ekspor-hasil-pca-ke-csv">Pembentukan DataFrame &amp; Ekspor Hasil PCA ke CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-pca-setelah-dilakukan-tahapan-tf-idf">Tahapan PCA Setelah dilakukan tahapan TF-IDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemisahan-fitur-x-dan-label-y">Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-explained-variance-ratio-menentukan-jumlah-komponen">Analisis Explained Variance Ratio (Menentukan Jumlah Komponen)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplikasi-pca-reduksi-menjadi-2-komponen-utama">Aplikasi PCA (Reduksi menjadi 2 Komponen Utama)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-scatter-plot-2d-sport-vs-finance">Visualisasi Scatter Plot 2D (Sport vs. Finance)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembentukan-dataframe-ekspor-hasil-pca-ke-csv">Pembentukan DataFrame &amp; Ekspor Hasil PCA ke CSV</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -373,8 +368,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="pemisahan-fitur-x-dan-label-y">
-<h1>Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)<a class="headerlink" href="#pemisahan-fitur-x-dan-label-y" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="tahapan-pca">
+<h1>Tahapan PCA<a class="headerlink" href="#tahapan-pca" title="Permalink to this heading">#</a></h1>
+<section id="tahapan-pca-setelah-dilakukan-tahapan-tf-idf">
+<h2>Tahapan PCA Setelah dilakukan tahapan TF-IDF<a class="headerlink" href="#tahapan-pca-setelah-dilakukan-tahapan-tf-idf" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="pemisahan-fitur-x-dan-label-y">
+<h2>Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)<a class="headerlink" href="#pemisahan-fitur-x-dan-label-y" title="Permalink to this heading">#</a></h2>
 <p>Memisahkan kolom matriks TF-IDF (sebagai variabel prediktor <span class="math notranslate nohighlight">\(X\)</span>) dari kolom id dan label (sebagai variabel target <span class="math notranslate nohighlight">\(y\)</span>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -404,7 +404,7 @@ document.write(`
 </div>
 </section>
 <section id="analisis-explained-variance-ratio-menentukan-jumlah-komponen">
-<h1>Analisis Explained Variance Ratio (Menentukan Jumlah Komponen)<a class="headerlink" href="#analisis-explained-variance-ratio-menentukan-jumlah-komponen" title="Permalink to this heading">#</a></h1>
+<h2>Analisis Explained Variance Ratio (Menentukan Jumlah Komponen)<a class="headerlink" href="#analisis-explained-variance-ratio-menentukan-jumlah-komponen" title="Permalink to this heading">#</a></h2>
 <p>Melihat berapa banyak informasi (varians) dari ribuan kata unik yang berhasil dipertahankan saat dikompresi menjadi sejumlah komponen PCA.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -448,7 +448,7 @@ document.write(`
 </div>
 </section>
 <section id="aplikasi-pca-reduksi-menjadi-2-komponen-utama">
-<h1>Aplikasi PCA (Reduksi menjadi 2 Komponen Utama)<a class="headerlink" href="#aplikasi-pca-reduksi-menjadi-2-komponen-utama" title="Permalink to this heading">#</a></h1>
+<h2>Aplikasi PCA (Reduksi menjadi 2 Komponen Utama)<a class="headerlink" href="#aplikasi-pca-reduksi-menjadi-2-komponen-utama" title="Permalink to this heading">#</a></h2>
 <p>Mengompresi ribuan kolom kata unik menjadi 2 Utama (PC1 &amp; PC2) agar dapat dipetakan secara visual dalam koordinat 2D.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -476,7 +476,7 @@ document.write(`
 </div>
 </section>
 <section id="visualisasi-scatter-plot-2d-sport-vs-finance">
-<h1>Visualisasi Scatter Plot 2D (Sport vs. Finance)<a class="headerlink" href="#visualisasi-scatter-plot-2d-sport-vs-finance" title="Permalink to this heading">#</a></h1>
+<h2>Visualisasi Scatter Plot 2D (Sport vs. Finance)<a class="headerlink" href="#visualisasi-scatter-plot-2d-sport-vs-finance" title="Permalink to this heading">#</a></h2>
 <p>Menggambar sebaran data hasil PCA dalam ruang 2D untuk melihat pemisahan kelompok (clustering/separation) antara kategori Sport (1) dan Finance (0).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -517,7 +517,7 @@ document.write(`
 </div>
 </section>
 <section id="pembentukan-dataframe-ekspor-hasil-pca-ke-csv">
-<h1>Pembentukan DataFrame &amp; Ekspor Hasil PCA ke CSV<a class="headerlink" href="#pembentukan-dataframe-ekspor-hasil-pca-ke-csv" title="Permalink to this heading">#</a></h1>
+<h2>Pembentukan DataFrame &amp; Ekspor Hasil PCA ke CSV<a class="headerlink" href="#pembentukan-dataframe-ekspor-hasil-pca-ke-csv" title="Permalink to this heading">#</a></h2>
 <p>Menyimpan hasil reduksi dimensi PCA ke dalam file CSV sebagai dataset akhir yang siap digunakan untuk pemodelan Machine Learning (seperti Klasifikasi Naive Bayes, SVM, atau K-NN).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -716,6 +716,7 @@ document.write(`
 </div>
 </div>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -753,15 +754,15 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Load Data Hasil Preprocessing</p>
+        <p class="prev-next-title">Proses TF-IDF</p>
       </div>
     </a>
     <a class="right-next"
-       href="modelling.html"
+       href="dasar-skipgram.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Modelling</p>
+        <p class="prev-next-title">Dasar Skipgram</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -781,13 +782,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-explained-variance-ratio-menentukan-jumlah-komponen">Analisis Explained Variance Ratio (Menentukan Jumlah Komponen)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#aplikasi-pca-reduksi-menjadi-2-komponen-utama">Aplikasi PCA (Reduksi menjadi 2 Komponen Utama)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-scatter-plot-2d-sport-vs-finance">Visualisasi Scatter Plot 2D (Sport vs. Finance)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pembentukan-dataframe-ekspor-hasil-pca-ke-csv">Pembentukan DataFrame &amp; Ekspor Hasil PCA ke CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-pca-setelah-dilakukan-tahapan-tf-idf">Tahapan PCA Setelah dilakukan tahapan TF-IDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemisahan-fitur-x-dan-label-y">Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-explained-variance-ratio-menentukan-jumlah-komponen">Analisis Explained Variance Ratio (Menentukan Jumlah Komponen)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplikasi-pca-reduksi-menjadi-2-komponen-utama">Aplikasi PCA (Reduksi menjadi 2 Komponen Utama)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-scatter-plot-2d-sport-vs-finance">Visualisasi Scatter Plot 2D (Sport vs. Finance)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembentukan-dataframe-ekspor-hasil-pca-ke-csv">Pembentukan DataFrame &amp; Ekspor Hasil PCA ke CSV</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

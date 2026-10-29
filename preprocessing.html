@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'preprocessing';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Catatan" href="catatan.html" />
+    <link rel="next" title="Proses TF-IDF" href="prosesTF-IDF.html" />
     <link rel="prev" title="Crawling data" href="crawling.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -174,23 +174,18 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="catatan.html">Catatan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="crawling.html">Crawling data</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Preprocessing data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catatan.html">Catatan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prosesTF-IDF.html">Load Data Hasil Preprocessing</a></li>
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="PCA.html">Pemisahan Fitur (<span class="math notranslate nohighlight">\(X\)</span>) dan Label (<span class="math notranslate nohighlight">\(y\)</span>)</a></li>
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="prosesTF-IDF.html">Proses TF-IDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCA.html">Tahapan PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dasar-skipgram.html">Dasar Skipgram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="skipgram_tanpa_pca.html">Skip-gram Tanpa PCA (Word Embedding)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelling.html">Modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="skipgram.html">Contoh Skipgram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clasifikasi_skipgram.html">Skip-gram (Word Embedding)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelling-w2v.html">Modelling</a></li>
+
+
 </ul>
 
     </div>
@@ -354,14 +349,27 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keterangan-dataset">Keterangan Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-library-sastrawi">Inisialisasi Library Sastrawi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-folding">Case Folding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning">Cleaning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenization">Tokenization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-slang-istilah-asing">Normalisasi Slang &amp; Istilah Asing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stopword-removal">Stopword Removal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">Stemming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesing-menggunakan-stopword-remover">Preprocesing Menggunakan Stopword Remover</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keterangan-dataset">Keterangan Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-library-sastrawi">Inisialisasi Library Sastrawi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#case-folding">Case Folding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning">Cleaning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenization">Tokenization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-slang-istilah-asing">Normalisasi Slang &amp; Istilah Asing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stopword-removal">Stopword Removal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">Stemming</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesing-tanpa-menggunakan-stopword-remover">Preprocesing Tanpa Menggunakan Stopword Remover</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Keterangan Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Inisialisasi Library Sastrawi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Case Folding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Cleaning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Tokenization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Normalisasi Slang &amp; Istilah Asing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Stemming</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -377,17 +385,21 @@ document.write(`
 <h1>Preprocessing data<a class="headerlink" href="#preprocessing-data" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
 </div>
+<section id="preprocesing-menggunakan-stopword-remover">
+<h2>Preprocesing Menggunakan Stopword Remover<a class="headerlink" href="#preprocesing-menggunakan-stopword-remover" title="Permalink to this heading">#</a></h2>
 <section id="keterangan-dataset">
-<h2>Keterangan Dataset<a class="headerlink" href="#keterangan-dataset" title="Permalink to this heading">#</a></h2>
+<h3>Keterangan Dataset<a class="headerlink" href="#keterangan-dataset" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load dataset hasil scraping</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'dataset_detik.csv'</span><span class="p">)</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'Data'</span><span class="p">,</span> <span class="s1">'dataset_detik.csv'</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 
 <span class="c1"># 1. Cek Informasi Awal</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Informasi Dataset Awal"</span><span class="p">)</span>
@@ -400,7 +412,9 @@ document.write(`
 
 <span class="c1"># 2. Filter Fitur yang Digunakan</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'isi_berita'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Daftar Fitur Digunakan : </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Keterangan Fitur yang Digunakan:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"- id         : identitas unik untuk setiap berita"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"- isi_berita : teks atau isi lengkap berita"</span><span class="p">)</span>
@@ -408,13 +422,13 @@ document.write(`
 
 <span class="c1"># 3. Tampilkan baris data</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Scraping Selesai! Data disimpan ke 'dataset_detik.csv'"</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Informasi Dataset Awal
-Total Baris Data : 200 baris
+Total Baris Data : 199 baris
 Daftar Fitur Awal : ['id', 'isi_berita', 'label', 'url']
 
 Daftar Fitur Digunakan : ['id', 'isi_berita', 'label']
@@ -454,31 +468,31 @@ Scraping Selesai! Data disimpan ke 'dataset_detik.csv'
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>Ketua Umum Komite Olahraga Nasional Indonesia ...</td>
+      <td>Indonesia mencatatkan sejarah di dunia senam. ...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>Pengurus Pusat Kickboxing Indonesia (PP KBI) p...</td>
+      <td>Sean Gelael dan Team WRT 32 punya kans naik po...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>Lina Hisage, atlet tolak peluru asal Wamena, P...</td>
+      <td>Tiga pebalap Team WRT 32 bakal bagi tugas akhi...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>Timnas Equestrian Indonesia sudah bertolak ke ...</td>
+      <td>Tim basket Hangtuah memanfaatkan turnamen pram...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>Dalam dua seri terakhir MotoGP 2027, Marc Marq...</td>
+      <td>Atlet panahan Indonesia, Nurisa Dian Ashrifah,...</td>
       <td>sport</td>
     </tr>
   </tbody>
@@ -487,7 +501,7 @@ Scraping Selesai! Data disimpan ke 'dataset_detik.csv'
 </div>
 </section>
 <section id="inisialisasi-library-sastrawi">
-<h2>Inisialisasi Library Sastrawi<a class="headerlink" href="#inisialisasi-library-sastrawi" title="Permalink to this heading">#</a></h2>
+<h3>Inisialisasi Library Sastrawi<a class="headerlink" href="#inisialisasi-library-sastrawi" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
@@ -506,28 +520,28 @@ Scraping Selesai! Data disimpan ke 'dataset_detik.csv'
 </div>
 </section>
 <section id="case-folding">
-<h2>Case Folding<a class="headerlink" href="#case-folding" title="Permalink to this heading">#</a></h2>
+<h3>Case Folding<a class="headerlink" href="#case-folding" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Eksekusi Case Folding (mengubah huruf kapital menjadi huruf kecil)</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">'step1_case_folding'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'isi_berita'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
 <span class="c1"># 2. Tampilkan Perbandingan Sebelum dan Sesudah (Tabel Pandas)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=== PERBANDINGAN SEBELUM &amp; SESUDAH CASE FOLDING (TABEL) ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Perbandingan Sebelum &amp; Sesudah Case Folding (Tabel) ---"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'isi_berita'</span><span class="p">,</span> <span class="s1">'step1_case_folding'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 
 <span class="c1"># 3. Tampilkan Detail Teks 1 Sampel Artikel untuk Membandingkan Karakter</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== DETAIL CONTOH TEKS BARIS PERTAMA (ID: 1) ==="</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"🔴 SEBELUM (isi_berita):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2"> --- Detail Contoh Teks Baris Pertama (ID: 1) --- "</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"* Sebelum (isi_berita):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'isi_berita'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">200</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"...</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"🟢 SESUDAH (step1_case_folding):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"* Sesudah (step1_case_folding):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step1_case_folding'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">200</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"..."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== PERBANDINGAN SEBELUM &amp; SESUDAH CASE FOLDING (TABEL) ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Perbandingan Sebelum &amp; Sesudah Case Folding (Tabel) ---
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -558,39 +572,41 @@ Scraping Selesai! Data disimpan ke 'dataset_detik.csv'
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>Ketua Umum Komite Olahraga Nasional Indonesia ...</td>
-      <td>ketua umum komite olahraga nasional indonesia ...</td>
+      <td>Indonesia mencatatkan sejarah di dunia senam. ...</td>
+      <td>indonesia mencatatkan sejarah di dunia senam. ...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>Pengurus Pusat Kickboxing Indonesia (PP KBI) p...</td>
-      <td>pengurus pusat kickboxing indonesia (pp kbi) p...</td>
+      <td>Sean Gelael dan Team WRT 32 punya kans naik po...</td>
+      <td>sean gelael dan team wrt 32 punya kans naik po...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>Lina Hisage, atlet tolak peluru asal Wamena, P...</td>
-      <td>lina hisage, atlet tolak peluru asal wamena, p...</td>
+      <td>Tiga pebalap Team WRT 32 bakal bagi tugas akhi...</td>
+      <td>tiga pebalap team wrt 32 bakal bagi tugas akhi...</td>
       <td>sport</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== DETAIL CONTOH TEKS BARIS PERTAMA (ID: 1) ===
-🔴 SEBELUM (isi_berita):
-Ketua Umum Komite Olahraga Nasional Indonesia (KONI) Pusat Letjen TNI Purn Marciano Norman resmi menutup program Sport Diplomacy antara Indonesia dan Timor Leste. Kegiatan ini berlangsung pada 11-14 S...
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> --- Detail Contoh Teks Baris Pertama (ID: 1) --- 
+* Sebelum (isi_berita):
+Indonesia mencatatkan sejarah di dunia senam. Mereka jadi tuan rumah pertama untuk ajang Asian Gym fo Life Challenge 2026.
+Ajang bernama lengkap 1st Asian Gym for Life Challenge 2026 presented by POZA...
 
-🟢 SESUDAH (step1_case_folding):
-ketua umum komite olahraga nasional indonesia (koni) pusat letjen tni purn marciano norman resmi menutup program sport diplomacy antara indonesia dan timor leste. kegiatan ini berlangsung pada 11-14 s...
+* Sesudah (step1_case_folding):
+indonesia mencatatkan sejarah di dunia senam. mereka jadi tuan rumah pertama untuk ajang asian gym fo life challenge 2026.
+ajang bernama lengkap 1st asian gym for life challenge 2026 presented by poza...
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="cleaning">
-<h2>Cleaning<a class="headerlink" href="#cleaning" title="Permalink to this heading">#</a></h2>
+<h3>Cleaning<a class="headerlink" href="#cleaning" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
@@ -612,21 +628,21 @@ ketua umum komite olahraga nasional indonesia (koni) pusat letjen tni purn marci
 <span class="n">df</span><span class="p">[</span><span class="s1">'step2_cleaning'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'step1_case_folding'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">clean_text</span><span class="p">)</span>
 
 <span class="c1"># 3. Tampilkan Perbandingan Sebelum dan Sesudah Cleaning (Tabel Pandas)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=== PERBANDINGAN SEBELUM &amp; SESUDAH CLEANING (TABEL) ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Perbandingan Sebelum &amp; Sesudah Cleaning (Tabel) ---"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'step1_case_folding'</span><span class="p">,</span> <span class="s1">'step2_cleaning'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
 <span class="c1"># 4. Tampilkan Detail Teks 1 Sampel Artikel (ID: 1)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">DETAIL CONTOH TEKS BARIS PERTAMA"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"🔴 SEBELUM CLEANING (step1_case_folding):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Detail Contoh Teks Baris Pertama"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"* Sebelum Cleaning (step1_case_folding):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step1_case_folding'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">200</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"...</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"🟢 SESUDAH CLEANING (step2_cleaning):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"* Sesudah Cleaning (step2_cleaning):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step2_cleaning'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">200</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"..."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== PERBANDINGAN SEBELUM &amp; SESUDAH CLEANING (TABEL) ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Perbandingan Sebelum &amp; Sesudah Cleaning (Tabel) ---
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -657,53 +673,54 @@ ketua umum komite olahraga nasional indonesia (koni) pusat letjen tni purn marci
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>ketua umum komite olahraga nasional indonesia ...</td>
-      <td>ketua umum komite olahraga nasional indonesia ...</td>
+      <td>indonesia mencatatkan sejarah di dunia senam. ...</td>
+      <td>indonesia mencatatkan sejarah di dunia senam m...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>pengurus pusat kickboxing indonesia (pp kbi) p...</td>
-      <td>pengurus pusat kickboxing indonesia pp kbi per...</td>
+      <td>sean gelael dan team wrt 32 punya kans naik po...</td>
+      <td>sean gelael dan team wrt punya kans naik podiu...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>lina hisage, atlet tolak peluru asal wamena, p...</td>
-      <td>lina hisage atlet tolak peluru asal wamena pap...</td>
+      <td>tiga pebalap team wrt 32 bakal bagi tugas akhi...</td>
+      <td>tiga pebalap team wrt bakal bagi tugas akhir p...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>timnas equestrian indonesia sudah bertolak ke ...</td>
-      <td>timnas equestrian indonesia sudah bertolak ke ...</td>
+      <td>tim basket hangtuah memanfaatkan turnamen pram...</td>
+      <td>tim basket hangtuah memanfaatkan turnamen pram...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>dalam dua seri terakhir motogp 2027, marc marq...</td>
-      <td>dalam dua seri terakhir motogp marc marquez su...</td>
+      <td>atlet panahan indonesia, nurisa dian ashrifah,...</td>
+      <td>atlet panahan indonesia nurisa dian ashrifah m...</td>
       <td>sport</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== DETAIL CONTOH TEKS BARIS PERTAMA (ID: 1) ===
-🔴 SEBELUM CLEANING (step1_case_folding):
-ketua umum komite olahraga nasional indonesia (koni) pusat letjen tni purn marciano norman resmi menutup program sport diplomacy antara indonesia dan timor leste. kegiatan ini berlangsung pada 11-14 s...
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Detail Contoh Teks Baris Pertama
+* Sebelum Cleaning (step1_case_folding):
+indonesia mencatatkan sejarah di dunia senam. mereka jadi tuan rumah pertama untuk ajang asian gym fo life challenge 2026.
+ajang bernama lengkap 1st asian gym for life challenge 2026 presented by poza...
 
-🟢 SESUDAH CLEANING (step2_cleaning):
-ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marciano norman resmi menutup program sport diplomacy antara indonesia dan timor leste kegiatan ini berlangsung pada september ...
+* Sesudah Cleaning (step2_cleaning):
+indonesia mencatatkan sejarah di dunia senam mereka jadi tuan rumah pertama untuk ajang asian gym fo life challenge ajang bernama lengkap st asian gym for life challenge presented by poza sport academ...
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="tokenization">
-<h2>Tokenization<a class="headerlink" href="#tokenization" title="Permalink to this heading">#</a></h2>
+<h3>Tokenization<a class="headerlink" href="#tokenization" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Terapkan Tokenization pada hasil Cleaning (step2_cleaning)</span>
@@ -711,21 +728,21 @@ ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marcian
 <span class="n">df</span><span class="p">[</span><span class="s1">'step3_tokenize'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'step2_cleaning'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 
 <span class="c1"># 2. Tampilkan Perbandingan Sebelum dan Sesudah Tokenization (Tabel Pandas)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=== PERBANDINGAN SEBELUM &amp; SESUDAH TOKENIZATION (TABEL) ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Perbandingan Sebelum &amp; Sesudah Tokenization (Tabel) ==="</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'step2_cleaning'</span><span class="p">,</span> <span class="s1">'step3_tokenize'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
 <span class="c1"># 3. Tampilkan Detail Teks 1 Sampel Artikel (ID: 1)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== DETAIL CONTOH TEKS BARIS PERTAMA (ID: 1) ==="</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"🔴 SEBELUM TOKENIZATION (step2_cleaning - Tipe Data: String):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Detail Contoh Teks Baris Pertama (ID: 1) ---"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"* Sebelum Tokenization (step2_cleaning - Tipe Data: String):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step2_cleaning'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"...</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"🟢 SESUDAH TOKENIZATION (step3_tokenize - Tipe Data: List of Tokens):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"* Sesudah Tokenization (step3_tokenize - Tipe Data: List of Tokens):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step3_tokenize'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">15</span><span class="p">])</span> <span class="c1"># Tampilkan 15 kata/token pertama</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== PERBANDINGAN SEBELUM &amp; SESUDAH TOKENIZATION (TABEL) ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Perbandingan Sebelum &amp; Sesudah Tokenization (Tabel) ===
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -756,53 +773,53 @@ ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marcian
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>ketua umum komite olahraga nasional indonesia ...</td>
-      <td>[ketua, umum, komite, olahraga, nasional, indo...</td>
+      <td>indonesia mencatatkan sejarah di dunia senam m...</td>
+      <td>[indonesia, mencatatkan, sejarah, di, dunia, s...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>pengurus pusat kickboxing indonesia pp kbi per...</td>
-      <td>[pengurus, pusat, kickboxing, indonesia, pp, k...</td>
+      <td>sean gelael dan team wrt punya kans naik podiu...</td>
+      <td>[sean, gelael, dan, team, wrt, punya, kans, na...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>lina hisage atlet tolak peluru asal wamena pap...</td>
-      <td>[lina, hisage, atlet, tolak, peluru, asal, wam...</td>
+      <td>tiga pebalap team wrt bakal bagi tugas akhir p...</td>
+      <td>[tiga, pebalap, team, wrt, bakal, bagi, tugas,...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>timnas equestrian indonesia sudah bertolak ke ...</td>
-      <td>[timnas, equestrian, indonesia, sudah, bertola...</td>
+      <td>tim basket hangtuah memanfaatkan turnamen pram...</td>
+      <td>[tim, basket, hangtuah, memanfaatkan, turnamen...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>dalam dua seri terakhir motogp marc marquez su...</td>
-      <td>[dalam, dua, seri, terakhir, motogp, marc, mar...</td>
+      <td>atlet panahan indonesia nurisa dian ashrifah m...</td>
+      <td>[atlet, panahan, indonesia, nurisa, dian, ashr...</td>
       <td>sport</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== DETAIL CONTOH TEKS BARIS PERTAMA (ID: 1) ===
-🔴 SEBELUM TOKENIZATION (step2_cleaning - Tipe Data: String):
-ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marciano norman resmi menutup program sport diplomacy antara indonesia dan ti...
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Detail Contoh Teks Baris Pertama (ID: 1) ---
+* Sebelum Tokenization (step2_cleaning - Tipe Data: String):
+indonesia mencatatkan sejarah di dunia senam mereka jadi tuan rumah pertama untuk ajang asian gym fo life challenge ajang bernama lengkap st asian gym...
 
-🟢 SESUDAH TOKENIZATION (step3_tokenize - Tipe Data: List of Tokens):
-['ketua', 'umum', 'komite', 'olahraga', 'nasional', 'indonesia', 'koni', 'pusat', 'letjen', 'tni', 'purn', 'marciano', 'norman', 'resmi', 'menutup']
+* Sesudah Tokenization (step3_tokenize - Tipe Data: List of Tokens):
+['indonesia', 'mencatatkan', 'sejarah', 'di', 'dunia', 'senam', 'mereka', 'jadi', 'tuan', 'rumah', 'pertama', 'untuk', 'ajang', 'asian', 'gym']
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="normalisasi-slang-istilah-asing">
-<h2>Normalisasi Slang &amp; Istilah Asing<a class="headerlink" href="#normalisasi-slang-istilah-asing" title="Permalink to this heading">#</a></h2>
+<h3>Normalisasi Slang &amp; Istilah Asing<a class="headerlink" href="#normalisasi-slang-istilah-asing" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Definisi Kamus Normalisasi (Slang, Singkatan, &amp; Istilah Asing/Olahraga/Keuangan)</span>
@@ -837,21 +854,21 @@ ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marcian
 <span class="n">df</span><span class="p">[</span><span class="s1">'step4_normalized'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'step3_tokenize'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">normalize_tokens</span><span class="p">)</span>
 
 <span class="c1"># 4. Tampilkan Perbandingan Sebelum dan Sesudah Normalisasi (Tabel Pandas)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=== PERBANDINGAN SEBELUM &amp; SESUDAH NORMALISASI (TABEL) ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Perbandingan Sebelumnya &amp; Sesudah Normalisasi (Tabel) ---"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'step3_tokenize'</span><span class="p">,</span> <span class="s1">'step4_normalized'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
 <span class="c1"># 5. Tampilkan Detail Teks 1 Sampel Artikel (ID: 1)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== DETAIL CONTOH TEKS BARIS PERTAMA (ID: 1) ==="</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"🔴 SEBELUM NORMALISASI (step3_tokenize):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Detail Contoh Teks Baris Pertama (ID: 1) ---"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"* Sebelum Normalisasi (step3_tokenize):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step3_tokenize'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">15</span><span class="p">])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🟢 SESUDAH NORMALISASI (step4_normalized):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">* Sesudah Normalisasi (step4_normalized):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step4_normalized'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">15</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== PERBANDINGAN SEBELUM &amp; SESUDAH NORMALISASI (TABEL) ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Perbandingan Sebelumnya &amp; Sesudah Normalisasi (Tabel) ---
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -882,53 +899,53 @@ ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marcian
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>[ketua, umum, komite, olahraga, nasional, indo...</td>
-      <td>[ketua, umum, komite, olahraga, nasional, indo...</td>
+      <td>[indonesia, mencatatkan, sejarah, di, dunia, s...</td>
+      <td>[indonesia, mencatatkan, sejarah, di, dunia, s...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>[pengurus, pusat, kickboxing, indonesia, pp, k...</td>
-      <td>[pengurus, pusat, kickboxing, indonesia, pp, k...</td>
+      <td>[sean, gelael, dan, team, wrt, punya, kans, na...</td>
+      <td>[sean, gelael, dan, team, wrt, punya, kans, na...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>[lina, hisage, atlet, tolak, peluru, asal, wam...</td>
-      <td>[lina, hisage, atlet, tolak, peluru, asal, wam...</td>
+      <td>[tiga, pebalap, team, wrt, bakal, bagi, tugas,...</td>
+      <td>[tiga, pebalap, team, wrt, bakal, bagi, tugas,...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>[timnas, equestrian, indonesia, sudah, bertola...</td>
-      <td>[timnas, equestrian, indonesia, sudah, bertola...</td>
+      <td>[tim, basket, hangtuah, memanfaatkan, turnamen...</td>
+      <td>[tim, basket, hangtuah, memanfaatkan, turnamen...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>[dalam, dua, seri, terakhir, motogp, marc, mar...</td>
-      <td>[dalam, dua, seri, terakhir, motogp, marc, mar...</td>
+      <td>[atlet, panahan, indonesia, nurisa, dian, ashr...</td>
+      <td>[atlet, panahan, indonesia, nurisa, dian, ashr...</td>
       <td>sport</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== DETAIL CONTOH TEKS BARIS PERTAMA (ID: 1) ===
-🔴 SEBELUM NORMALISASI (step3_tokenize):
-['ketua', 'umum', 'komite', 'olahraga', 'nasional', 'indonesia', 'koni', 'pusat', 'letjen', 'tni', 'purn', 'marciano', 'norman', 'resmi', 'menutup']
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Detail Contoh Teks Baris Pertama (ID: 1) ---
+* Sebelum Normalisasi (step3_tokenize):
+['indonesia', 'mencatatkan', 'sejarah', 'di', 'dunia', 'senam', 'mereka', 'jadi', 'tuan', 'rumah', 'pertama', 'untuk', 'ajang', 'asian', 'gym']
 
-🟢 SESUDAH NORMALISASI (step4_normalized):
-['ketua', 'umum', 'komite', 'olahraga', 'nasional', 'indonesia', 'koni', 'pusat', 'letjen', 'tni', 'purn', 'marciano', 'norman', 'resmi', 'menutup']
+* Sesudah Normalisasi (step4_normalized):
+['indonesia', 'mencatatkan', 'sejarah', 'di', 'dunia', 'senam', 'mereka', 'jadi', 'tuan', 'rumah', 'pertama', 'untuk', 'ajang', 'asian', 'gym']
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="stopword-removal">
-<h2>Stopword Removal<a class="headerlink" href="#stopword-removal" title="Permalink to this heading">#</a></h2>
+<h3>Stopword Removal<a class="headerlink" href="#stopword-removal" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Terapkan Stopword Removal pada hasil Normalisasi (step4_normalized)</span>
@@ -938,21 +955,21 @@ ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marcian
 <span class="p">)</span>
 
 <span class="c1"># 2. Tampilkan Perbandingan Sebelum dan Sesudah Stopword Removal (Tabel Pandas)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=== PERBANDINGAN SEBELUM &amp; SESUDAH STOPWORD REMOVAL (TABEL) ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Perbandingan Sebelum &amp; Sesudah Stopword Removal (Tabel) ---"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'step4_normalized'</span><span class="p">,</span> <span class="s1">'step5_stopword'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
 <span class="c1"># 3. Tampilkan Detail Teks 1 Sampel Artikel (ID: 1)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== DETAIL CONTOH TEKS BARIS PERTAMA (ID: 1) ==="</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"🔴 SEBELUM STOPWORD REMOVAL (step4_normalized):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Detail Contoh Teks Baris Pertama (ID: 1) ---"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"* Sebelum Stopword Removal (step4_normalized):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step4_normalized'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">15</span><span class="p">])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🟢 SESUDAH STOPWORD REMOVAL (step5_stopword):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">* Sesudah Stopword Removal (step5_stopword):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step5_stopword'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"..."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== PERBANDINGAN SEBELUM &amp; SESUDAH STOPWORD REMOVAL (TABEL) ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Perbandingan Sebelum &amp; Sesudah Stopword Removal (Tabel) ---
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -983,53 +1000,53 @@ ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marcian
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>[ketua, umum, komite, olahraga, nasional, indo...</td>
-      <td>ketua umum komite olahraga nasional indonesia ...</td>
+      <td>[indonesia, mencatatkan, sejarah, di, dunia, s...</td>
+      <td>indonesia mencatatkan sejarah dunia senam jadi...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>[pengurus, pusat, kickboxing, indonesia, pp, k...</td>
-      <td>pengurus pusat kickboxing indonesia pp kbi per...</td>
+      <td>[sean, gelael, dan, team, wrt, punya, kans, na...</td>
+      <td>sean gelael team wrt punya kans naik podium ho...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>[lina, hisage, atlet, tolak, peluru, asal, wam...</td>
-      <td>lina hisage atlet tolak peluru asal wamena pap...</td>
+      <td>[tiga, pebalap, team, wrt, bakal, bagi, tugas,...</td>
+      <td>tiga pebalap team wrt bakal tugas akhir pekan ...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>[timnas, equestrian, indonesia, sudah, bertola...</td>
-      <td>timnas equestrian indonesia bertolak jepang je...</td>
+      <td>[tim, basket, hangtuah, memanfaatkan, turnamen...</td>
+      <td>tim basket hangtuah memanfaatkan turnamen pram...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>[dalam, dua, seri, terakhir, motogp, marc, mar...</td>
-      <td>dua seri terakhir motogp marc marquez sukses s...</td>
+      <td>[atlet, panahan, indonesia, nurisa, dian, ashr...</td>
+      <td>atlet panahan indonesia nurisa dian ashrifah m...</td>
       <td>sport</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== DETAIL CONTOH TEKS BARIS PERTAMA (ID: 1) ===
-🔴 SEBELUM STOPWORD REMOVAL (step4_normalized):
-['ketua', 'umum', 'komite', 'olahraga', 'nasional', 'indonesia', 'koni', 'pusat', 'letjen', 'tni', 'purn', 'marciano', 'norman', 'resmi', 'menutup']
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Detail Contoh Teks Baris Pertama (ID: 1) ---
+* Sebelum Stopword Removal (step4_normalized):
+['indonesia', 'mencatatkan', 'sejarah', 'di', 'dunia', 'senam', 'mereka', 'jadi', 'tuan', 'rumah', 'pertama', 'untuk', 'ajang', 'asian', 'gym']
 
-🟢 SESUDAH STOPWORD REMOVAL (step5_stopword):
-ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marciano norman resmi menutup program sport diplomacy indonesia timor leste k...
+* Sesudah Stopword Removal (step5_stopword):
+indonesia mencatatkan sejarah dunia senam jadi tuan rumah pertama ajang asian gym fo life challenge ajang bernama lengkap st asian gym for life challe...
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="stemming">
-<h2>Stemming<a class="headerlink" href="#stemming" title="Permalink to this heading">#</a></h2>
+<h3>Stemming<a class="headerlink" href="#stemming" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Terapkan Stemming pada hasil Stopword Removal (step5_stopword)</span>
@@ -1040,15 +1057,15 @@ ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marcian
 <span class="n">df</span><span class="p">[</span><span class="s1">'isi_berita_clean'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'step6_stemming'</span><span class="p">]</span>
 
 <span class="c1"># 2. Tampilkan Perbandingan Sebelum dan Sesudah Stemming (Tabel Pandas)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== PERBANDINGAN SEBELUM &amp; SESUDAH STEMMING (TABEL) ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Perbandingan Sebelum &amp; Sesudah Stemming (Tabel) ---"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'step5_stopword'</span><span class="p">,</span> <span class="s1">'step6_stemming'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 
 <span class="c1"># 3. Tampilkan Detail Teks 1 Sampel Artikel (ID: 1)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== DETAIL CONTOH TEKS BARIS PERTAMA (ID: 1) ==="</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"🔴 SEBELUM STEMMING (step5_stopword):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Detail Contoh Teks Baris Pertama (ID: 1) ---"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"* Sebelum Stemming (step5_stopword):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step5_stopword'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"...</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"🟢 SESUDAH STEMMING (step6_stemming / isi_berita_clean):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"* Sesudah Stemming (step6_stemming / isi_berita_clean):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step6_stemming'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"..."</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1056,7 +1073,7 @@ ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marcian
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sedang memproses Stemming (proses ini memakan waktu 1–3 menit)...
 
-=== PERBANDINGAN SEBELUM &amp; SESUDAH STEMMING (TABEL) ===
+--- Perbandingan Sebelum &amp; Sesudah Stemming (Tabel) ---
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1087,91 +1104,86 @@ ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marcian
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>ketua umum komite olahraga nasional indonesia ...</td>
-      <td>ketua umum komite olahraga nasional indonesia ...</td>
+      <td>indonesia mencatatkan sejarah dunia senam jadi...</td>
+      <td>indonesia catat sejarah dunia senam jadi tuan ...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>pengurus pusat kickboxing indonesia pp kbi per...</td>
-      <td>urus pusat kickboxing indonesia pp kbi periode...</td>
+      <td>sean gelael team wrt punya kans naik podium ho...</td>
+      <td>sean gelael team wrt punya kans naik podium ho...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>lina hisage atlet tolak peluru asal wamena pap...</td>
-      <td>lina hisage atlet tolak peluru asal wamena pap...</td>
+      <td>tiga pebalap team wrt bakal tugas akhir pekan ...</td>
+      <td>tiga balap team wrt bakal tugas akhir pekan se...</td>
       <td>sport</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== DETAIL CONTOH TEKS BARIS PERTAMA (ID: 1) ===
-🔴 SEBELUM STEMMING (step5_stopword):
-ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marciano norman resmi menutup program sport diplomacy indonesia timor leste k...
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Detail Contoh Teks Baris Pertama (ID: 1) ---
+* Sebelum Stemming (step5_stopword):
+indonesia mencatatkan sejarah dunia senam jadi tuan rumah pertama ajang asian gym fo life challenge ajang bernama lengkap st asian gym for life challe...
 
-🟢 SESUDAH STEMMING (step6_stemming / isi_berita_clean):
-ketua umum komite olahraga nasional indonesia koni pusat letjen tni purn marciano norman resmi tutup program sport diplomacy indonesia timor leste gia...
+* Sesudah Stemming (step6_stemming / isi_berita_clean):
+indonesia catat sejarah dunia senam jadi tuan rumah pertama ajang asi gym fo life challenge ajang nama lengkap st asi gym for life challenge presented...
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4. Simpan Hasil Preprocessing Lengkap ke CSV</span>
-<span class="n">df_preprocessed</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'isi_berita_clean'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">df_preprocessed</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'detik_preprocessed.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8-sig'</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">✅ Seluruh 6 Tahap Preprocessing Selesai!"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"💾 Dataset bersih akhir tersimpan sebagai 'detik_preprocessed.csv'"</span><span class="p">)</span>
+<span class="c1"># Lokasi Data mengikuti folder kerja notebook</span>
+<span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">"Data"</span>
+<span class="n">OUTPUT_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Pastikan hasil stemming sudah tersedia</span>
+<span class="k">if</span> <span class="s2">"isi_berita_clean"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+        <span class="s2">"Kolom isi_berita_clean belum ada. "</span>
+        <span class="s2">"Jalankan dahulu sel preprocessing dan stemming."</span>
+    <span class="p">)</span>
+
+<span class="c1"># Simpan hasil teks yang benar-benar sudah diproses</span>
+<span class="n">df_preprocessed</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
+    <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"isi_berita_clean"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">]</span>
+<span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">output_path</span> <span class="o">=</span> <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"detik_preprocessed.csv"</span>
+
+<span class="n">df_preprocessed</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">output_path</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+<span class="p">)</span>
+
+<span class="c1"># Verifikasi file benar-benar tersimpan dan terbaca</span>
+<span class="k">if</span> <span class="n">output_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">hasil_baca</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"BERHASIL DISIMPAN"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Lokasi lengkap:"</span><span class="p">,</span> <span class="n">output_path</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Ukuran file:"</span><span class="p">,</span> <span class="n">output_path</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span><span class="p">,</span> <span class="s2">"byte"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah baris:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hasil_baca</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Kolom:"</span><span class="p">,</span> <span class="n">hasil_baca</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">hasil_baca</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"File gagal dibuat: </span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Seluruh 6 Tahap Preprocessing Selesai!
-💾 Dataset bersih akhir tersimpan sebagai 'detik_preprocessed.csv'
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Pastikan DataFrame df_preprocessed atau file detik_preprocessed.csv siap</span>
-<span class="k">if</span> <span class="s1">'df_preprocessed'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span>
-    <span class="n">df_preprocessed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'detik_preprocessed.csv'</span><span class="p">)</span>
-
-<span class="c1"># 2. Ringkasan Informasi Dataset Hasil Preprocessing</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=== RINGKASAN DATASET PREPROCESSED ==="</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"• Total Baris Data : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_preprocessed</span><span class="p">)</span><span class="si">}</span><span class="s2"> berita"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"• Daftar Fitur     : </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">df_preprocessed</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"• Distribusi Label :</span><span class="se">\n</span><span class="si">{</span><span class="n">df_preprocessed</span><span class="p">[</span><span class="s1">'label'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="c1"># 3. Tampilkan Tabel Preview Data Hasil Preprocessing (5 Baris Pertama)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"=== TABEL DATASET PREPROCESSED (HEAD) ==="</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">df_preprocessed</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-
-<span class="c1"># 4. Tampilkan Sampel Acak Per Kategori (2 Sport &amp; 2 Finance)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== SAMPEL DATA PER LABEL (SPORT &amp; FINANCE) ==="</span><span class="p">)</span>
-
-<span class="c1"># Ambil sampel lalu urutkan descending berdasarkan label</span>
-<span class="n">sampel_df</span> <span class="o">=</span> <span class="n">df_preprocessed</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'label'</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">sampel_df</span> <span class="o">=</span> <span class="n">sampel_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'label'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="n">display</span><span class="p">(</span><span class="n">sampel_df</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== RINGKASAN DATASET PREPROCESSED ===
-• Total Baris Data : 200 berita
-• Daftar Fitur     : ['id', 'isi_berita_clean', 'label']
-• Distribusi Label :
-label
-sport      100
-finance    100
-
-=== TABEL DATASET PREPROCESSED (HEAD) ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BERHASIL DISIMPAN
+Lokasi lengkap: D:\webmining\Data\detik_preprocessed.csv
+Ukuran file: 414033 byte
+Jumlah baris: 199
+Kolom: ['id', 'isi_berita_clean', 'label']
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1201,36 +1213,739 @@ finance    100
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>ketua umum komite olahraga nasional indonesia ...</td>
+      <td>indonesia catat sejarah di dunia senam mereka ...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>urus pusat kickboxing indonesia pp kbi periode...</td>
+      <td>sean gelael dan team wrt punya kans naik podiu...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>lina hisage atlet tolak peluru asal wamena pap...</td>
+      <td>tiga balap team wrt bakal bagi tugas akhir pek...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>timnas equestrian indonesia tolak jepang jelan...</td>
+      <td>tim basket hangtuah manfaat turnamen pramusim ...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>dua seri akhir motogp marc marquez sukses sapu...</td>
+      <td>atlet panah indonesia nurisa dian ashrifah dap...</td>
       <td>sport</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== SAMPEL DATA PER LABEL (SPORT &amp; FINANCE) ===
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="preprocesing-tanpa-menggunakan-stopword-remover">
+<h2>Preprocesing Tanpa Menggunakan Stopword Remover<a class="headerlink" href="#preprocesing-tanpa-menggunakan-stopword-remover" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h3>Keterangan Dataset<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load dataset hasil scraping</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'Data'</span><span class="p">,</span> <span class="s1">'dataset_detik.csv'</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+<span class="c1"># 1. Cek Informasi Awal</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Informasi Dataset Awal"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total Baris Data : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> baris"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Daftar Fitur Awal : </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Buat kolom id jika belum tersedia pada dataset hasil scraping</span>
+<span class="k">if</span> <span class="s1">'id'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># 2. Filter Fitur yang Digunakan</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'isi_berita'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Daftar Fitur Digunakan : </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Keterangan Fitur yang Digunakan:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"- id         : identitas unik untuk setiap berita"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"- isi_berita : teks atau isi lengkap berita"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"- label      : kategori berita, yaitu sport atau finance"</span><span class="p">)</span>
+
+<span class="c1"># 3. Tampilkan baris data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Scraping Selesai! Data disimpan ke 'dataset_detik.csv'"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Informasi Dataset Awal
+Total Baris Data : 199 baris
+Daftar Fitur Awal : ['id', 'isi_berita', 'label', 'url']
+
+Daftar Fitur Digunakan : ['id', 'isi_berita', 'label']
+
+Keterangan Fitur yang Digunakan:
+- id         : identitas unik untuk setiap berita
+- isi_berita : teks atau isi lengkap berita
+- label      : kategori berita, yaitu sport atau finance
+
+Scraping Selesai! Data disimpan ke 'dataset_detik.csv'
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>isi_berita</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Indonesia mencatatkan sejarah di dunia senam. ...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Sean Gelael dan Team WRT 32 punya kans naik po...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Tiga pebalap Team WRT 32 bakal bagi tugas akhi...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Tim basket Hangtuah memanfaatkan turnamen pram...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Atlet panahan Indonesia, Nurisa Dian Ashrifah,...</td>
+      <td>sport</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id2">
+<h3>Inisialisasi Library Sastrawi<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Sastrawi.StopWordRemover.StopWordRemoverFactory</span><span class="w"> </span><span class="kn">import</span> <span class="n">StopWordRemoverFactory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Sastrawi.Stemmer.StemmerFactory</span><span class="w"> </span><span class="kn">import</span> <span class="n">StemmerFactory</span>
+
+<span class="c1"># Inisialisasi Sastrawi</span>
+<span class="n">stop_factory</span> <span class="o">=</span> <span class="n">StopWordRemoverFactory</span><span class="p">()</span>
+<span class="n">stopword_remover</span> <span class="o">=</span> <span class="n">stop_factory</span><span class="o">.</span><span class="n">create_stop_word_remover</span><span class="p">()</span>
+
+<span class="n">stem_factory</span> <span class="o">=</span> <span class="n">StemmerFactory</span><span class="p">()</span>
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">stem_factory</span><span class="o">.</span><span class="n">create_stemmer</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Case Folding<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Eksekusi Case Folding (mengubah huruf kapital menjadi huruf kecil)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'step1_case_folding'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'isi_berita'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="c1"># 2. Tampilkan Perbandingan Sebelum dan Sesudah (Tabel Pandas)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Perbandingan Sebelum &amp; Sesudah Case Folding (Tabel) ---"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'isi_berita'</span><span class="p">,</span> <span class="s1">'step1_case_folding'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># 3. Tampilkan Detail Teks 1 Sampel Artikel untuk Membandingkan Karakter</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2"> --- Detail Contoh Teks Baris Pertama (ID: 1) --- "</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sebelum (isi_berita):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'isi_berita'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">200</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"...</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sesudah (step1_case_folding):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step1_case_folding'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">200</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"..."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Perbandingan Sebelum &amp; Sesudah Case Folding (Tabel) ---
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>isi_berita</th>
+      <th>step1_case_folding</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Indonesia mencatatkan sejarah di dunia senam. ...</td>
+      <td>indonesia mencatatkan sejarah di dunia senam. ...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Sean Gelael dan Team WRT 32 punya kans naik po...</td>
+      <td>sean gelael dan team wrt 32 punya kans naik po...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Tiga pebalap Team WRT 32 bakal bagi tugas akhi...</td>
+      <td>tiga pebalap team wrt 32 bakal bagi tugas akhi...</td>
+      <td>sport</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> --- Detail Contoh Teks Baris Pertama (ID: 1) --- 
+Sebelum (isi_berita):
+Indonesia mencatatkan sejarah di dunia senam. Mereka jadi tuan rumah pertama untuk ajang Asian Gym fo Life Challenge 2026.
+Ajang bernama lengkap 1st Asian Gym for Life Challenge 2026 presented by POZA...
+
+Sesudah (step1_case_folding):
+indonesia mencatatkan sejarah di dunia senam. mereka jadi tuan rumah pertama untuk ajang asian gym fo life challenge 2026.
+ajang bernama lengkap 1st asian gym for life challenge 2026 presented by poza...
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>Cleaning<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Definisi fungsi cleaning</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clean_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'https?://\S+|www\.\S+'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span> <span class="c1"># Hapus URL/link</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\d+'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>                   <span class="c1"># Hapus angka</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[^\w\s]'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>              <span class="c1"># Hapus tanda baca &amp; simbol khusus</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\s+'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>          <span class="c1"># Hapus spasi berlebih &amp; spasi di awal/akhir</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="c1"># 2. Terapkan cleaning pada hasil Case Folding (step1_case_folding)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'step2_cleaning'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'step1_case_folding'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">clean_text</span><span class="p">)</span>
+
+<span class="c1"># 3. Tampilkan Perbandingan Sebelum dan Sesudah Cleaning (Tabel Pandas)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Perbandingan Sebelum &amp; Sesudah Cleaning (Tabel) ---"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'step1_case_folding'</span><span class="p">,</span> <span class="s1">'step2_cleaning'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># 4. Tampilkan Detail Teks 1 Sampel Artikel (ID: 1)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Detail Contoh Teks Baris Pertama"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sebelum Cleaning (step1_case_folding):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step1_case_folding'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">200</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"...</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sesudah Cleaning (step2_cleaning):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step2_cleaning'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">200</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"..."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Perbandingan Sebelum &amp; Sesudah Cleaning (Tabel) ---
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>step1_case_folding</th>
+      <th>step2_cleaning</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>indonesia mencatatkan sejarah di dunia senam. ...</td>
+      <td>indonesia mencatatkan sejarah di dunia senam m...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>sean gelael dan team wrt 32 punya kans naik po...</td>
+      <td>sean gelael dan team wrt punya kans naik podiu...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>tiga pebalap team wrt 32 bakal bagi tugas akhi...</td>
+      <td>tiga pebalap team wrt bakal bagi tugas akhir p...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>tim basket hangtuah memanfaatkan turnamen pram...</td>
+      <td>tim basket hangtuah memanfaatkan turnamen pram...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>atlet panahan indonesia, nurisa dian ashrifah,...</td>
+      <td>atlet panahan indonesia nurisa dian ashrifah m...</td>
+      <td>sport</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Detail Contoh Teks Baris Pertama
+Sebelum Cleaning (step1_case_folding):
+indonesia mencatatkan sejarah di dunia senam. mereka jadi tuan rumah pertama untuk ajang asian gym fo life challenge 2026.
+ajang bernama lengkap 1st asian gym for life challenge 2026 presented by poza...
+
+Sesudah Cleaning (step2_cleaning):
+indonesia mencatatkan sejarah di dunia senam mereka jadi tuan rumah pertama untuk ajang asian gym fo life challenge ajang bernama lengkap st asian gym for life challenge presented by poza sport academ...
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>Tokenization<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Terapkan Tokenization pada hasil Cleaning (step2_cleaning)</span>
+<span class="c1"># Menggunakan .split() karena teks sudah bersih dari tanda baca</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'step3_tokenize'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'step2_cleaning'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+
+<span class="c1"># 2. Tampilkan Perbandingan Sebelum dan Sesudah Tokenization (Tabel Pandas)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Perbandingan Sebelum &amp; Sesudah Tokenization (Tabel) ==="</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'step2_cleaning'</span><span class="p">,</span> <span class="s1">'step3_tokenize'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># 3. Tampilkan Detail Teks 1 Sampel Artikel (ID: 1)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Detail Contoh Teks Baris Pertama (ID: 1) ---"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sebelum Tokenization (step2_cleaning - Tipe Data: String):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step2_cleaning'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"...</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sesudah Tokenization (step3_tokenize - Tipe Data: List of Tokens):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step3_tokenize'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">15</span><span class="p">])</span> <span class="c1"># Tampilkan 15 kata/token pertama</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Perbandingan Sebelum &amp; Sesudah Tokenization (Tabel) ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>step2_cleaning</th>
+      <th>step3_tokenize</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>indonesia mencatatkan sejarah di dunia senam m...</td>
+      <td>[indonesia, mencatatkan, sejarah, di, dunia, s...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>sean gelael dan team wrt punya kans naik podiu...</td>
+      <td>[sean, gelael, dan, team, wrt, punya, kans, na...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>tiga pebalap team wrt bakal bagi tugas akhir p...</td>
+      <td>[tiga, pebalap, team, wrt, bakal, bagi, tugas,...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>tim basket hangtuah memanfaatkan turnamen pram...</td>
+      <td>[tim, basket, hangtuah, memanfaatkan, turnamen...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>atlet panahan indonesia nurisa dian ashrifah m...</td>
+      <td>[atlet, panahan, indonesia, nurisa, dian, ashr...</td>
+      <td>sport</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Detail Contoh Teks Baris Pertama (ID: 1) ---
+Sebelum Tokenization (step2_cleaning - Tipe Data: String):
+indonesia mencatatkan sejarah di dunia senam mereka jadi tuan rumah pertama untuk ajang asian gym fo life challenge ajang bernama lengkap st asian gym...
+
+Sesudah Tokenization (step3_tokenize - Tipe Data: List of Tokens):
+['indonesia', 'mencatatkan', 'sejarah', 'di', 'dunia', 'senam', 'mereka', 'jadi', 'tuan', 'rumah', 'pertama', 'untuk', 'ajang', 'asian', 'gym']
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>Normalisasi Slang &amp; Istilah Asing<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Definisi Kamus Normalisasi (Slang, Singkatan, &amp; Istilah Asing/Olahraga/Keuangan)</span>
+<span class="n">kamus_normalisasi</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># Singkatan &amp; Slang Umum Bahasa Indonesia</span>
+    <span class="s1">'yg'</span><span class="p">:</span> <span class="s1">'yang'</span><span class="p">,</span>
+    <span class="s1">'dgn'</span><span class="p">:</span> <span class="s1">'dengan'</span><span class="p">,</span>
+    <span class="s1">'utk'</span><span class="p">:</span> <span class="s1">'untuk'</span><span class="p">,</span>
+    <span class="s1">'dr'</span><span class="p">:</span> <span class="s1">'dari'</span><span class="p">,</span>
+    <span class="s1">'sbg'</span><span class="p">:</span> <span class="s1">'sebagai'</span><span class="p">,</span>
+    <span class="s1">'tdk'</span><span class="p">:</span> <span class="s1">'tidak'</span><span class="p">,</span>
+    <span class="s1">'krn'</span><span class="p">:</span> <span class="s1">'karena'</span><span class="p">,</span>
+    <span class="s1">'sdh'</span><span class="p">:</span> <span class="s1">'sudah'</span><span class="p">,</span>
+    <span class="s1">'blm'</span><span class="p">:</span> <span class="s1">'belum'</span><span class="p">,</span>
+    
+    <span class="c1"># Istilah Serapan / Inggris Kategori Sport &amp; Finance</span>
+    <span class="s1">'match'</span><span class="p">:</span> <span class="s1">'tanding'</span><span class="p">,</span>
+    <span class="s1">'coaching'</span><span class="p">:</span> <span class="s1">'pelatih'</span><span class="p">,</span>
+    <span class="s1">'coach'</span><span class="p">:</span> <span class="s1">'pelatih'</span><span class="p">,</span>
+    <span class="s1">'strikers'</span><span class="p">:</span> <span class="s1">'striker'</span><span class="p">,</span>
+    <span class="s1">'goal'</span><span class="p">:</span> <span class="s1">'gol'</span><span class="p">,</span>
+    <span class="s1">'percent'</span><span class="p">:</span> <span class="s1">'persen'</span><span class="p">,</span>
+    <span class="s1">'company'</span><span class="p">:</span> <span class="s1">'perusahaan'</span><span class="p">,</span>
+    <span class="s1">'tax'</span><span class="p">:</span> <span class="s1">'pajak'</span>
+<span class="p">}</span>
+
+<span class="c1"># 2. Fungsi Normalisasi per List Token</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">normalize_tokens</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">kamus_normalisasi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+
+<span class="c1"># 3. Terapkan Normalisasi pada step3_tokenize</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'step4_normalized'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'step3_tokenize'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">normalize_tokens</span><span class="p">)</span>
+
+<span class="c1"># 4. Tampilkan Perbandingan Sebelum dan Sesudah Normalisasi (Tabel Pandas)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"--- Perbandingan Sebelumnya &amp; Sesudah Normalisasi (Tabel) ---"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'step3_tokenize'</span><span class="p">,</span> <span class="s1">'step4_normalized'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># 5. Tampilkan Detail Teks 1 Sampel Artikel (ID: 1)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Detail Contoh Teks Baris Pertama (ID: 1) ---"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sebelum Normalisasi (step3_tokenize):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step3_tokenize'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">15</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Sesudah Normalisasi (step4_normalized):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step4_normalized'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">15</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Perbandingan Sebelumnya &amp; Sesudah Normalisasi (Tabel) ---
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>step3_tokenize</th>
+      <th>step4_normalized</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>[indonesia, mencatatkan, sejarah, di, dunia, s...</td>
+      <td>[indonesia, mencatatkan, sejarah, di, dunia, s...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>[sean, gelael, dan, team, wrt, punya, kans, na...</td>
+      <td>[sean, gelael, dan, team, wrt, punya, kans, na...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>[tiga, pebalap, team, wrt, bakal, bagi, tugas,...</td>
+      <td>[tiga, pebalap, team, wrt, bakal, bagi, tugas,...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>[tim, basket, hangtuah, memanfaatkan, turnamen...</td>
+      <td>[tim, basket, hangtuah, memanfaatkan, turnamen...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>[atlet, panahan, indonesia, nurisa, dian, ashr...</td>
+      <td>[atlet, panahan, indonesia, nurisa, dian, ashr...</td>
+      <td>sport</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Detail Contoh Teks Baris Pertama (ID: 1) ---
+Sebelum Normalisasi (step3_tokenize):
+['indonesia', 'mencatatkan', 'sejarah', 'di', 'dunia', 'senam', 'mereka', 'jadi', 'tuan', 'rumah', 'pertama', 'untuk', 'ajang', 'asian', 'gym']
+
+Sesudah Normalisasi (step4_normalized):
+['indonesia', 'mencatatkan', 'sejarah', 'di', 'dunia', 'senam', 'mereka', 'jadi', 'tuan', 'rumah', 'pertama', 'untuk', 'ajang', 'asian', 'gym']
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h3>Stemming<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Terapkan Stemming pada hasil Stopword Removal</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sedang memproses Stemming (proses ini memakan waktu 1–3 menit)..."</span><span class="p">)</span>
+
+<span class="c1"># Jika step4_normalized berisi list token,</span>
+<span class="c1"># lakukan stemming pada setiap kata lalu gabungkan kembali menjadi teks.</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'step5_stemming'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'step4_normalized'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">tokens</span><span class="p">:</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span>
+    <span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+    <span class="k">else</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="c1"># Tetapkan kolom hasil bersih akhir</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'isi_berita_clean'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'step5_stemming'</span><span class="p">]</span>
+
+<span class="c1"># 2. Tampilkan Perbandingan Sebelum dan Sesudah Stemming</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Perbandingan Sebelum &amp; Sesudah Stemming (Tabel) ---"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'step4_normalized'</span><span class="p">,</span> <span class="s1">'step5_stemming'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 3. Tampilkan Detail Teks 1 Sampel Artikel (ID: 1)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Detail Contoh Teks Baris Pertama (ID: 1) ---"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sebelum Stemming (step4_normalized):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step4_normalized'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])[:</span><span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"...</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sesudah Stemming (step5_stemming / isi_berita_clean):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'step5_stemming'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])[:</span><span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"..."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sedang memproses Stemming (proses ini memakan waktu 1–3 menit)...
+
+--- Perbandingan Sebelum &amp; Sesudah Stemming (Tabel) ---
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>step4_normalized</th>
+      <th>step5_stemming</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>[indonesia, mencatatkan, sejarah, di, dunia, s...</td>
+      <td>indonesia catat sejarah di dunia senam mereka ...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>[sean, gelael, dan, team, wrt, punya, kans, na...</td>
+      <td>sean gelael dan team wrt punya kans naik podiu...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>[tiga, pebalap, team, wrt, bakal, bagi, tugas,...</td>
+      <td>tiga balap team wrt bakal bagi tugas akhir pek...</td>
+      <td>sport</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Detail Contoh Teks Baris Pertama (ID: 1) ---
+Sebelum Stemming (step4_normalized):
+['indonesia', 'mencatatkan', 'sejarah', 'di', 'dunia', 'senam', 'mereka', 'jadi', 'tuan', 'rumah', 'pertama', 'untuk', 'ajang', 'asian', 'gym', 'fo', ...
+
+Sesudah Stemming (step5_stemming / isi_berita_clean):
+indonesia catat sejarah di dunia senam mereka jadi tuan rumah pertama untuk ajang asi gym fo life challenge ajang nama lengkap st asi gym for life cha...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">"Data"</span>
+<span class="n">OUTPUT_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="s2">"isi_berita_clean"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+        <span class="s2">"Kolom isi_berita_clean belum ada. "</span>
+        <span class="s2">"Jalankan dahulu sel preprocessing dan stemming."</span>
+    <span class="p">)</span>
+
+<span class="n">df_preprocessed</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
+    <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"isi_berita_clean"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">]</span>
+<span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">output_path</span> <span class="o">=</span> <span class="n">OUTPUT_DIR</span> <span class="o">/</span> <span class="s2">"detik_preprocessed-TanpaStopword.csv"</span>
+
+<span class="n">df_preprocessed</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">output_path</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">output_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">hasil_baca</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"BERHASIL DISIMPAN"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Lokasi lengkap:"</span><span class="p">,</span> <span class="n">output_path</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Ukuran file:"</span><span class="p">,</span> <span class="n">output_path</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span><span class="p">,</span> <span class="s2">"byte"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah baris:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hasil_baca</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Kolom:"</span><span class="p">,</span> <span class="n">hasil_baca</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">hasil_baca</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"File gagal dibuat: </span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BERHASIL DISIMPAN
+Lokasi lengkap: D:\webmining\Data\detik_preprocessed-TanpaStopword.csv
+Ukuran file: 414033 byte
+Jumlah baris: 199
+Kolom: ['id', 'isi_berita_clean', 'label']
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1258,69 +1973,40 @@ finance    100
   </thead>
   <tbody>
     <tr>
-      <th>79</th>
-      <td>80</td>
-      <td>audisi umum pb djarum kudus sedang langsung pe...</td>
+      <th>0</th>
+      <td>1</td>
+      <td>indonesia catat sejarah di dunia senam mereka ...</td>
       <td>sport</td>
     </tr>
     <tr>
-      <th>37</th>
-      <td>38</td>
-      <td>kim antonelli rebut podium pertama seri italia...</td>
+      <th>1</th>
+      <td>2</td>
+      <td>sean gelael dan team wrt punya kans naik podiu...</td>
       <td>sport</td>
     </tr>
     <tr>
-      <th>65</th>
-      <td>66</td>
-      <td>balap vr racing team franco morbidelli jalan h...</td>
+      <th>2</th>
+      <td>3</td>
+      <td>tiga balap team wrt bakal bagi tugas akhir pek...</td>
       <td>sport</td>
     </tr>
     <tr>
-      <th>54</th>
-      <td>55</td>
-      <td>juara renang ajar mula jakarta selatan selesai...</td>
+      <th>3</th>
+      <td>4</td>
+      <td>tim basket hangtuah manfaat turnamen pramusim ...</td>
       <td>sport</td>
     </tr>
     <tr>
-      <th>15</th>
-      <td>16</td>
-      <td>kontingen atlet ajar jakarta barat jakbar ukir...</td>
+      <th>4</th>
+      <td>5</td>
+      <td>atlet panah indonesia nurisa dian ashrifah dap...</td>
       <td>sport</td>
-    </tr>
-    <tr>
-      <th>183</th>
-      <td>184</td>
-      <td>kepala eksekutif awas bursa mineral komoditas ...</td>
-      <td>finance</td>
-    </tr>
-    <tr>
-      <th>153</th>
-      <td>154</td>
-      <td>pt industri kereta api persero inka buka suara...</td>
-      <td>finance</td>
-    </tr>
-    <tr>
-      <th>170</th>
-      <td>171</td>
-      <td>pt bukit asam tbk ptba ungkap besar beban penu...</td>
-      <td>finance</td>
-    </tr>
-    <tr>
-      <th>145</th>
-      <td>146</td>
-      <td>presiden prabowo subianto resmi lrt jakarta ha...</td>
-      <td>finance</td>
-    </tr>
-    <tr>
-      <th>144</th>
-      <td>145</td>
-      <td>presiden prabowo subianto resmi panjang layan ...</td>
-      <td>finance</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
+</section>
 </section>
 </section>
 
@@ -1364,11 +2050,11 @@ finance    100
       </div>
     </a>
     <a class="right-next"
-       href="catatan.html"
+       href="prosesTF-IDF.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Catatan</p>
+        <p class="prev-next-title">Proses TF-IDF</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1388,14 +2074,27 @@ finance    100
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keterangan-dataset">Keterangan Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-library-sastrawi">Inisialisasi Library Sastrawi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-folding">Case Folding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning">Cleaning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenization">Tokenization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-slang-istilah-asing">Normalisasi Slang &amp; Istilah Asing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stopword-removal">Stopword Removal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">Stemming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesing-menggunakan-stopword-remover">Preprocesing Menggunakan Stopword Remover</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keterangan-dataset">Keterangan Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-library-sastrawi">Inisialisasi Library Sastrawi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#case-folding">Case Folding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning">Cleaning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenization">Tokenization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-slang-istilah-asing">Normalisasi Slang &amp; Istilah Asing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stopword-removal">Stopword Removal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">Stemming</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesing-tanpa-menggunakan-stopword-remover">Preprocesing Tanpa Menggunakan Stopword Remover</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Keterangan Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Inisialisasi Library Sastrawi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Case Folding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Cleaning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Tokenization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Normalisasi Slang &amp; Istilah Asing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Stemming</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
