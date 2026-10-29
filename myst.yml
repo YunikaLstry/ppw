@@ -1,0 +1,27 @@
+version: 1
+project:
+  title: Web Mining
+  authors:
+    - name: Yunika Lestari
+  exclude:
+    - nwebmining/*
+    - .venv/*
+    - _build/*
+    - .ipynb_checkpoints/*
+  github: YunikaLstry/ppw
+  toc:
+    - file: profil.ipynb
+    - file: crawling.ipynb
+    - file: preprocessing.ipynb
+    - file: catatan.ipynb
+    - file: prosesTF-IDF.ipynb
+    - file: PCA.ipynb
+    - file: modelling.ipynb
+    - file: skipgram.ipynb
+    - file: clasifikasi_skipgram.ipynb
+    - file: modelling-w2v.ipynb
+site:
+  options:
+    logo: foto.JPG
+    folders: true
+  template: book-theme

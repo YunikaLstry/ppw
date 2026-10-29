@@ -1,0 +1,2 @@
+﻿Model,Accuracy,Balanced Accuracy,Precision Macro,Recall Macro,F1 Macro,Precision Weighted,Recall Weighted,F1 Weighted
+Word2Vec Skip-gram + GaussianNB,0.95,0.95,0.9545454545454546,0.95,0.949874686716792,0.9545454545454545,0.95,0.949874686716792
