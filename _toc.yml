@@ -1,0 +1,14 @@
+format: jb-book
+root: profil
+chapters:
+  - file: catatan
+  - file: crawling
+  - file: preprocessing
+  - file: prosesTF-IDF
+  - file: PCA
+  - file: dasar-skipgram
+  - file: skipgram_tanpa_pca
+  - file: modelling
+  - file: clasifikasi_skipgram
+  - file: modelling-w2v
+  - file: best-model

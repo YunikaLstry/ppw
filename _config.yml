@@ -1,0 +1,22 @@
+title: Web Mining
+author: Yunika Lestari
+logo: foto.JPG
+
+repository:
+  url: https://github.com/YunikaLstry/ppw
+  branch: main
+
+execute:
+  execute_notebooks: "off"
+
+html:
+  use_repository_button: true
+  use_issues_button: false
+
+exclude_patterns:
+  - "nwebmining/*"
+  - ".venv/*"
+  - ".venv-1/*"
+  - ".venv-2/*"
+  - "_build/*"
+  - ".ipynb_checkpoints/*"
