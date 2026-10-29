@@ -5,19 +5,25 @@
     <loc>http://localhost:3000</loc>
   </url>
   <url>
+    <loc>http://localhost:3000/catatan</loc>
+  </url>
+  <url>
     <loc>http://localhost:3000/crawling</loc>
   </url>
   <url>
     <loc>http://localhost:3000/preprocessing</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/catatan</loc>
-  </url>
-  <url>
     <loc>http://localhost:3000/prosestf-idf</loc>
   </url>
   <url>
     <loc>http://localhost:3000/pca</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/dasar-skipgram</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/skipgram-tanpa-pca</loc>
   </url>
   <url>
     <loc>http://localhost:3000/modelling</loc>
@@ -27,5 +33,8 @@
   </url>
   <url>
     <loc>http://localhost:3000/modelling-w2v</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/best-model</loc>
   </url>
 </urlset>
