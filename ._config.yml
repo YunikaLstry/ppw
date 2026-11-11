@@ -2,12 +2,13 @@ title: Web Mining
 author: Yunika Lestari
 logo: foto.JPG
 
-# Tambahkan konfigurasi URL di sini agar CSS/aset web terbaca dengan benar di GitHub Pages
+# --- BAGIAN INI WAJIB ADA AGAR BASE_URL TIDAK ERROR ---
 url: "https://yunikalstry.github.io"
 baseurl: "/ppw/"
+# -----------------------------------------------------
 
 repository:
-  url: https://github.com/YunikaLstry/ppw  # Ganti dengan URL repositori GitHub Anda
+  url: https://github.com/YunikaLstry/ppw
   branch: main
 
 execute:

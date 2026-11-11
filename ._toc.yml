@@ -12,3 +12,4 @@ chapters:
   - file: clasifikasi_skipgram
   - file: modelling-w2v
   - file: best-model
+  - file: graph
