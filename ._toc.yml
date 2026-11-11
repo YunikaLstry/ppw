@@ -10,6 +10,6 @@ chapters:
   - file: skipgram_tanpa_pca
   - file: modelling
   - file: clasifikasi_skipgram
+  - file: graph
   - file: modelling-w2v
   - file: best-model
-  - file: graph
