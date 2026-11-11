@@ -8,8 +8,8 @@ chapters:
   - file: PCA
   - file: dasar-skipgram
   - file: skipgram_tanpa_pca
+  - file: skipgram_tanpa_pca copy
   - file: modelling
   - file: clasifikasi_skipgram
-  - file: graph
   - file: modelling-w2v
   - file: best-model
